@@ -40,6 +40,11 @@ client.distube
 						value: `\`${song.uploader.name}\``,
 						inline: true,
 					},
+					{
+						name: '🤨 Source',
+						value: `\`${song.source}\``,
+						inline: true,
+					},
 				)
 				.setTimestamp()
 				.setFooter('><', song.user.displayAvatarURL({ dynamic: true })) ],
@@ -77,6 +82,11 @@ client.distube
 					{
 						name: '⬆️ Uploader',
 						value: `\`${song.uploader}\``,
+						inline: true,
+					},
+					{
+						name: '🤨 Source',
+						value: `\`${song.source}\``,
 						inline: true,
 					},
 				)
