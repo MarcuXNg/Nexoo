@@ -39,8 +39,8 @@ module.exports = {
             }
 
             const collector = message.channel.createMessageComponentCollector({ filter, max: 1, });
-            collector.on("end", (ButtonInteraction) => {
-                const id = ButtonInteraction.first().customId;
+            collector.on("collect", (ButtonInteraction) => {
+                const id = ButtonInteraction.customId;
 
                 if (id === 'Skip') {
                     queue.skip()
