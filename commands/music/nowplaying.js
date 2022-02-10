@@ -38,7 +38,7 @@ module.exports = {
                 return interaction.send({ content: ` you can't use this button` });
             }
 
-            const collector = message.channel.createMessageComponentCollector({ filter, max: 1, });
+            const collector = message.channel.createMessageComponentCollector({ filter });
             collector.on("collect", (ButtonInteraction) => {
                 const id = ButtonInteraction.customId;
 
