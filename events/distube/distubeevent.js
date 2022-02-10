@@ -24,6 +24,16 @@ client.distube
                         name: "Duration",
                         value: `\`${song.formattedDuration}\``,
                         inline: true
+                    },
+                    {
+                        name: ":eyes: Views",
+                        value: `\`${song.views}\``,
+                        inline: true
+                    },
+                    {
+                        name: ":like: Likes",
+                        value: `\`${song.likes}\``,
+                        inline: true
                     }
                 )
                 .setTimestamp()
@@ -47,6 +57,16 @@ client.distube
                     {
                         name: "Duration",
                         value: `\`${song.formattedDuration}\``,
+                        inline: true
+                    },
+                    {
+                        name: ":eyes: Views",
+                        value: `\`${song.views}\``,
+                        inline: true
+                    },
+                    {
+                        name: ":like: Likes",
+                        value: `\`${song.likes}\``,
                         inline: true
                     }
                 )
