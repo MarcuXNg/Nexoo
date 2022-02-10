@@ -16,22 +16,22 @@ client.distube
                 .setDescription(`**[${song.name}](${song.url})** \n ${status(queue)}`)
                 .setFields(
                     {
-                        name: "Requested By",
+                        name: "💤 Requested By",
                         value: `${song.user}`,
                         inline: true
                     },
                     {
-                        name: "Duration",
+                        name: "⏲️ Duration",
                         value: `\`${song.formattedDuration}\``,
                         inline: true
                     },
                     {
-                        name: ":eyes: Views",
+                        name: "👀 Views",
                         value: `\`${song.views}\``,
                         inline: true
                     },
                     {
-                        name: ":like: Likes",
+                        name: "👍 Likes",
                         value: `\`${song.likes}\``,
                         inline: true
                     }
@@ -50,22 +50,22 @@ client.distube
                 .setDescription(`**[${song.name}](${song.url})** \n ${status(queue)}`)
                 .setFields(
                     {
-                        name: "Requested By",
+                        name: "💤 Requested By",
                         value: `${song.user}`,
                         inline: true
                     },
                     {
-                        name: "Duration",
+                        name: "⏲️ Duration",
                         value: `\`${song.formattedDuration}\``,
                         inline: true
                     },
                     {
-                        name: ":eyes: Views",
+                        name: "👀 Views",
                         value: `\`${song.views}\``,
                         inline: true
                     },
                     {
-                        name: ":like: Likes",
+                        name: "👍 Likes",
                         value: `\`${song.likes}\``,
                         inline: true
                     }
