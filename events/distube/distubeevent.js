@@ -37,7 +37,7 @@ client.distube
 					},
 					{
 						name: '⬆️ Uploader',
-						value: `\`${song.uploader}\``,
+						value: `\`${song.uploader.name}\``,
 						inline: true,
 					},
 				)
