@@ -14,7 +14,7 @@ module.exports = {
       const GIF = await neko.nsfw.randomHentaiGif();
       message.channel.send({
         embeds: [
-          new Discord.MessageEmbed().setColor("RANDOM").setImage(GIF.url),
+          new Discord.MessageEmbed().setColor("RANDOM").setImage(GIF.url).setTitle(`That's what ${message.author.username} want`),
         ],
       });
     } catch (e) {
