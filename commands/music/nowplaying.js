@@ -196,13 +196,33 @@ module.exports = {
 						.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)}`)
 						.setFields(
 							{
-								name: 'Requested By',
+								name: '💤 Requested By',
 								value: `${song.user}`,
 								inline: true,
 							},
 							{
-								name: 'Duration',
+								name: '⏲️ Duration',
 								value: `\`${song.formattedDuration}\``,
+								inline: true,
+							},
+							{
+								name: '👀 Views',
+								value: `\`${song.views}\``,
+								inline: true,
+							},
+							{
+								name: '👍 Likes',
+								value: `\`${song.likes}\``,
+								inline: true,
+							},
+							{
+								name: '⬆️ Uploader',
+								value: `\`${song.uploader.name}\``,
+								inline: true,
+							},
+							{
+								name: '🤨 Source',
+								value: `\`${song.source}\``,
 								inline: true,
 							},
 						)
