@@ -1,25 +1,8 @@
 const client = require('../../index.js');
 const Discord = require('discord.js');
 const config = require('../../config.json');
-const { MessageEmbed, MessageSelectMenu, MessageActionRow, MessageButton } = require('discord.js');
 
 // distube events
-const components = [
-	new MessageActionRow().addComponents([
-		new MessageButton().setStyle('PRIMARY').setCustomId('Skip').setEmoji('⏭').setLabel('Skip'),
-		new MessageButton().setStyle('DANGER').setCustomId('Stop').setEmoji('🏠').setLabel('Stop'),
-		new MessageButton().setStyle('SECONDARY').setCustomId('Pause').setEmoji('⏸').setLabel('Pause'),
-		new MessageButton().setStyle('SUCCESS').setCustomId('Autoplay').setEmoji('🔁').setLabel('Autoplay'),
-		new MessageButton().setStyle('PRIMARY').setCustomId('Shuffle').setEmoji('🔀').setLabel('Shuffle'),
-	]),
-	new MessageActionRow().addComponents([
-		new MessageButton().setStyle('SUCCESS').setCustomId('Resume').setEmoji('🔁').setLabel('Resume'),
-		new MessageButton().setStyle('SUCCESS').setCustomId('Queue').setEmoji('🔂').setLabel('Queue'),
-		new MessageButton().setStyle('PRIMARY').setCustomId('Forward').setEmoji('⏩').setLabel('+10 Sec'),
-		new MessageButton().setStyle('PRIMARY').setCustomId('Rewind').setEmoji('⏪').setLabel('-10 Sec'),
-		new MessageButton().setStyle('SUCCESS').setCustomId('Addend').setEmoji('👌').setLabel('Addend'),
-	]),
-];
 
 const status = queue =>
 	`**Volume:** \`${queue.volume}%\` | **Filter:** \`${queue.filters.join(', ') || 'Off'}\` | **Loop:** \`${queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
@@ -65,7 +48,7 @@ client.distube
 					},
 				)
 				.setTimestamp()
-				.setFooter('><', song.user.displayAvatarURL({ dynamic: true })) ], components,
+				.setFooter('><', song.user.displayAvatarURL({ dynamic: true })) ],
 		},
 		),
 	)
