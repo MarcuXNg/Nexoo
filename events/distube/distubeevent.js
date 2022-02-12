@@ -153,15 +153,34 @@ client.distube
 	.on('searchResult', (message, result) => {
 		let i = 0;
 		message.channel.send(
-			`**Choose an option from below**\n${result
-				.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``)
-				.join('\n')}\n*Enter anything else or wait 60 seconds to cancel*`,
+			{
+				embeds: [
+					new Discord.MessageEmbed()
+						.setColor('RANDOM')
+						.setAuthor('Song selection. Type the song number to continue', message.author.avatarURL({ dynamic: true }))
+						.setDescription(`${result
+							.map(song => `**${++i}**. **[${song.name}](${song.url})** - \`${song.formattedDuration}\``)
+							.join('\n')}`)
+						.setThumbnail('https://i.imgur.com/FWKIR7N.png')
+						.setFooter(`This timeouts in 60 seconds. Type ${config.prefix}cancel or wait to cancel.`, message.author.avatarURL({ dynamic: true })) ],
+			},
 		);
 	})
-	.on('searchCancel', message => message.channel.send('❌ | Searching canceled'))
+	.on('searchCancel', message => message.channel.send({
+		embeds: [
+			new Discord.MessageEmbed()
+				.setColor('RANDOM')
+				.setTitle('🤌 Searching canceled')
+				.setDescription('Timeout!') ],
+	}))
 	.on('searchInvalidAnswer', message =>
-		message.channel.send(
-			'❌ | Invalid answer! You have to enter the number in the range of the results',
+		message.channel.send({
+			embeds: [
+				new Discord.MessageEmbed()
+					.setColor('RANDOM')
+					.setTitle('🙅‍♂️ Invalid choice! You have to enter the number in the range of the results')
+					.setDescription('Please choose again') ],
+		},
 		),
 	)
 	.on('searchDone', (message) => {
