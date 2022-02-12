@@ -47,7 +47,7 @@ client.distube
 					},
 				)
 				.setTimestamp()
-				.setFooter('><', song.user.displayAvatarURL({ dynamic: true })) ],
+				.setFooter('><', song.user.displayAvatarURL({ dynamic: true }))],
 		},
 		),
 	)
@@ -116,7 +116,7 @@ client.distube
 					},
 				)
 				.setTimestamp()
-				.setFooter('><', playlist.user.displayAvatarURL({ dynamic: true })) ],
+				.setFooter('><', playlist.user.displayAvatarURL({ dynamic: true }))],
 		},
 		),
 	)
@@ -149,4 +149,27 @@ client.distube
 	.on('initQueue', queue => {
 		queue.autoplay = false;
 		queue.volume = 100;
+	})
+	.on('searchResult', (message, result) => {
+		let i = 0;
+		message.channel.send(
+			`**Choose an option from below**\n${result
+				.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``)
+				.join('\n')}\n*Enter anything else or wait 60 seconds to cancel*`,
+		);
+	})
+	.on('searchCancel', message => message.channel.send('❌ | Searching canceled'))
+	.on('searchInvalidAnswer', message =>
+		message.channel.send(
+			'❌ | Invalid answer! You have to enter the number in the range of the results',
+		),
+	)
+	.on('searchDone', (message) => {
+		message.channel.send({
+			embeds: [
+				new Discord.MessageEmbed()
+					.setColor('RANDOM')
+					.setTitle('Search done!')
+					.setDescription('Hope you enjoy the music ❤️') ],
+		});
 	});
