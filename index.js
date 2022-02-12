@@ -46,7 +46,7 @@ client.distube = new DisTube(client, {
 	savePreviousSongs: true,
 	leaveOnEmpty: true,
 	emptyCooldown: 30,
-	nsfw: true,
+	nsfw: false,
 	leaveOnFinish: true,
 	leaveOnStop: true,
 	youtubeDL: false,
