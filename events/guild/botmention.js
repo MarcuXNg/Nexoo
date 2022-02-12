@@ -6,7 +6,6 @@ client.on('messageCreate', async message => {
 	// getting prefix when bot mention
 	if (message.author.bot) return;
 	if (!message.guild) return;
-	const prefix = config.prefix;
 	if (message.channel.partial) await message.channel.fetch();
 	if (message.partial) await message.fetch();
 	if (message.content.includes('@here') || message.content.includes('@everyone') || message.type == 'REPLY') return false;
@@ -16,7 +15,7 @@ client.on('messageCreate', async message => {
 		embed
 			.setAuthor('Hey, You Pinged me.. 😉')
 			.setColor('RANDOM')
-			.setDescription(`My prefix is **\`${prefix}\`**`)
+			.setDescription(`My prefix is **\`${config.prefix}\`**`)
 			.setFooter(`Type ${config.prefix}help to see the command`, message.author.avatarURL({ dynamic: true }));
 		message.channel.send({ embeds: [embed] });
 	}
