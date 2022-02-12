@@ -42,20 +42,33 @@ const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { YtDlpPlugin } = require('@distube/yt-dlp');
 const { DisTube } = require('distube');
 client.distube = new DisTube(client, {
-	searchSongs: true,
+	searchSongs: 5,
+	// emit replayed song
 	emitNewSongOnly: false,
+	// save the song which are played previously
 	savePreviousSongs: true,
+	// leave the channel if it is empty
 	leaveOnEmpty: true,
 	emptyCooldown: 30,
+	// play nsfw content
 	nsfw: true,
+	// leave the channel when finish
 	leaveOnFinish: true,
+	// leave the channel when there are nothing in the queue
 	leaveOnStop: true,
+	// ytdl = false
 	youtubeDL: false,
+	// disable addsong event
 	emitAddSongWhenCreatingQueue: false,
+	// enable addlist event
 	emitAddListWhenCreatingQueue: true,
+	// update ytdl
 	updateYouTubeDL: true,
+	// yt cookie (for nsfw)
 	youtubeCookie: process.env.YOUTUBECOOKIE,
+	// plugin
 	plugins: [
+		// spotify
 		new SpotifyPlugin({
 			parallel: true,
 			emitEventsAfterFetching: false,
@@ -64,7 +77,9 @@ client.distube = new DisTube(client, {
 				clientSecret: process.env.SPOTIFY_CLIENTSECRET,
 			},
 		}),
+		// soundcloud
 		new SoundCloudPlugin(),
+		// ytdl
 		new YtDlpPlugin({
 			highWaterMark: 1024 * 1024 * 64,
 			quality: 'highestaudio',
