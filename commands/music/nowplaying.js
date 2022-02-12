@@ -196,7 +196,7 @@ module.exports = {
 						.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)}`)
 						.setFields(
 							{
-								name: '💤 Requested By',
+								name: '🙆‍♂️ Requested By',
 								value: `${song.user}`,
 								inline: true,
 							},
