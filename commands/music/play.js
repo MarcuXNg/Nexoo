@@ -34,7 +34,10 @@ module.exports = {
 						textChannel: message.channel,
 						message,
 					});
-					await message.react('✅');
+					// voiceconnection
+					if (!message.guild.me.voice.channel) {
+						message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
+					}
 				}
 				catch (err) {
 					console.log(err);
