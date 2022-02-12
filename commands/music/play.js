@@ -22,22 +22,21 @@ module.exports = {
 			}
 			const SearchString = args.join(' ');
 			if (!SearchString) {
-				return message.reply({
+				return message.channel.send({
 					embeds: [
 						new Discord.MessageEmbed().setColor('RANDOM').setDescription(`❌ | **No song name or url provided!** : \`${config.prefix}play [song name/song url]\``)],
 				});
 			}
 			else {
 				try {
-					// voiceconnection
-					if (!message.guild.me.voice.channel) {
+					if (!voiceChannel) {
 						await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
-						await client.distube.play(message.member.voice.channel, SearchString, {
-							member: message.member,
-							textChannel: message.channel,
-							message,
-						});
 					}
+					await client.distube.play(message.member.voice.channel, SearchString, {
+						member: message.member,
+						textChannel: message.channel,
+						message,
+					});
 				}
 				catch (err) {
 					console.log(err);
