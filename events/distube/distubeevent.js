@@ -13,35 +13,35 @@ client.distube
 				.setColor('RANDOM')
 				.setThumbnail(`${song.thumbnail}`)
 				.setAuthor('Now playing', config.iconURL)
-				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)} \n ╰🔉VoiceChannel: <#${queue.voiceChannel.id}>`)
+				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)} \n **╰** 🔉**VoiceChannel**: <#${queue.voiceChannel.id}> - :hourglass: **Ping**: \`${client.ws.ping}\` ms.`)
 				.setFields(
 					{
-						name: '╰🙆‍♂️ Requested By',
+						name: '╰ 🙆‍♂️ Requested By',
 						value: `${song.user}`,
 						inline: true,
 					},
 					{
-						name: '╰⏲️ Duration',
+						name: '╰ ⏲️ Duration',
 						value: `\`${song.formattedDuration}\``,
 						inline: true,
 					},
 					{
-						name: '╰👀 Views',
+						name: '╰ 👀 Views',
 						value: `\`${song.views}\``,
 						inline: true,
 					},
 					{
-						name: '╰👍 Likes',
+						name: '╰ 👍 Likes',
 						value: `\`${song.likes}\``,
 						inline: true,
 					},
 					{
-						name: '╰⬆️ Uploader',
+						name: '╰ ⬆️ Uploader',
 						value: `\`${song.uploader.name}\``,
 						inline: true,
 					},
 					{
-						name: '╰🤨 Source',
+						name: '╰ 🤨 Source',
 						value: `\`${song.source}\``,
 						inline: true,
 					},
@@ -57,35 +57,35 @@ client.distube
 				.setColor('RANDOM')
 				.setThumbnail(`${song.thumbnail}`)
 				.setAuthor('Added to queue ', config.iconURL)
-				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)}`)
+				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)} \n **╰** 🔉**VoiceChannel**: <#${queue.voiceChannel.id}> - :hourglass: **Ping**: \`${client.ws.ping}\` ms.`)
 				.setFields(
 					{
-						name: '╰🙆‍♂️ Requested By',
+						name: '╰ 🙆‍♂️ Requested By',
 						value: `${song.user}`,
 						inline: true,
 					},
 					{
-						name: '╰⏲️ Duration',
+						name: '╰ ⏲️ Duration',
 						value: `\`${song.formattedDuration}\``,
 						inline: true,
 					},
 					{
-						name: '╰👀 Views',
+						name: '╰ 👀 Views',
 						value: `\`${song.views}\``,
 						inline: true,
 					},
 					{
-						name: '╰👍 Likes',
+						name: '╰ 👍 Likes',
 						value: `\`${song.likes}\``,
 						inline: true,
 					},
 					{
-						name: '╰⬆️ Uploader',
+						name: '╰ ⬆️ Uploader',
 						value: `\`${song.uploader.name}\``,
 						inline: true,
 					},
 					{
-						name: '╰🤨 Source',
+						name: '╰ 🤨 Source',
 						value: `\`${song.source}\``,
 						inline: true,
 					},
