@@ -46,12 +46,12 @@ client.distube = new DisTube(client, {
 	savePreviousSongs: true,
 	leaveOnEmpty: true,
 	emptyCooldown: 30,
-	nsfw: false,
+	nsfw: true,
 	leaveOnFinish: true,
 	leaveOnStop: true,
 	youtubeDL: false,
-	emitAddSongWhenCreatingQueue: false,
-	emitAddListWhenCreatingQueue: false,
+	emitAddSongWhenCreatingQueue: true,
+	emitAddListWhenCreatingQueue: true,
 	updateYouTubeDL: true,
 	plugins: [
 		new SpotifyPlugin({
