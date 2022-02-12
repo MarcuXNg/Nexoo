@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const config = require('../../config.json');
 
 // distube events
-
+const voiceChannel = client.message.member.voice.channel;
 const status = queue =>
 	`**Volume:** \`${queue.volume}%\` | **Filter:** \`${queue.filters.join(', ') || 'Off'}\` | **Loop:** \`${queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
 	}\` | **Autoplay:** \`${queue.autoplay ? 'On' : 'Off'}\``;
@@ -14,35 +14,35 @@ client.distube
 				.setColor('RANDOM')
 				.setThumbnail(`${song.thumbnail}`)
 				.setAuthor('Now playing', config.iconURL)
-				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)}`)
+				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)} \n ╰🔉VoiceChannel: <#${voiceChannel.id}>`)
 				.setFields(
 					{
-						name: '🙆‍♂️ Requested By',
+						name: '╰🙆‍♂️ Requested By',
 						value: `${song.user}`,
 						inline: true,
 					},
 					{
-						name: '⏲️ Duration',
+						name: '╰⏲️ Duration',
 						value: `\`${song.formattedDuration}\``,
 						inline: true,
 					},
 					{
-						name: '👀 Views',
+						name: '╰👀 Views',
 						value: `\`${song.views}\``,
 						inline: true,
 					},
 					{
-						name: '👍 Likes',
+						name: '╰👍 Likes',
 						value: `\`${song.likes}\``,
 						inline: true,
 					},
 					{
-						name: '⬆️ Uploader',
+						name: '╰⬆️ Uploader',
 						value: `\`${song.uploader.name}\``,
 						inline: true,
 					},
 					{
-						name: '🤨 Source',
+						name: '╰🤨 Source',
 						value: `\`${song.source}\``,
 						inline: true,
 					},
@@ -61,32 +61,32 @@ client.distube
 				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)}`)
 				.setFields(
 					{
-						name: '🙆‍♂️ Requested By',
+						name: '╰🙆‍♂️ Requested By',
 						value: `${song.user}`,
 						inline: true,
 					},
 					{
-						name: '⏲️ Duration',
+						name: '╰⏲️ Duration',
 						value: `\`${song.formattedDuration}\``,
 						inline: true,
 					},
 					{
-						name: '👀 Views',
+						name: '╰👀 Views',
 						value: `\`${song.views}\``,
 						inline: true,
 					},
 					{
-						name: '👍 Likes',
+						name: '╰👍 Likes',
 						value: `\`${song.likes}\``,
 						inline: true,
 					},
 					{
-						name: '⬆️ Uploader',
-						value: `\`${song.uploader}\``,
+						name: '╰⬆️ Uploader',
+						value: `\`${song.uploader.name}\``,
 						inline: true,
 					},
 					{
-						name: '🤨 Source',
+						name: '╰🤨 Source',
 						value: `\`${song.source}\``,
 						inline: true,
 					},
@@ -106,12 +106,12 @@ client.distube
 				} songs)\` \n ${status(queue)}`)
 				.setFields(
 					{
-						name: 'Requested By',
+						name: '╰🙆‍♂️ Requested By',
 						value: `${playlist.user}`,
 						inline: true,
 					},
 					{
-						name: 'Duration',
+						name: '╰⏲️ Duration',
 						value: `\`${playlist.formattedDuration}\``,
 						inline: true,
 					},
