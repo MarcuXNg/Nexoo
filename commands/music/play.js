@@ -17,23 +17,28 @@ module.exports = {
 			if (voiceChannel.full) {
 				return message.channel.send({
 					embeds: [
-						new Discord.MessageEmbed().setColor('RANDOM').setDescription('❌ | **the channel is full!**')],
+						new Discord.MessageEmbed().setColor('RANDOM').setDescription('❌ | **The channel is already full!**')],
 				});
 			}
 			const SearchString = args.join(' ');
 			if (!SearchString) {
 				return message.reply({
 					embeds: [
-						new Discord.MessageEmbed().setColor('RANDOM').setDescription(`❌ | **No song name or url provided!** : \`${config.prefix}play [song]\``)],
+						new Discord.MessageEmbed().setColor('RANDOM').setDescription(`❌ | **No song name or url provided!** : \`${config.prefix}play [song name/song url]\``)],
 				});
 			}
 			else {
-				await client.distube.play(message.member.voice.channel, SearchString, {
-					member: message.member,
-					textChannel: message.channel,
-					message,
-				});
-				await message.react('✅');
+				try {
+					await client.distube.play(message.member.voice.channel, SearchString, {
+						member: message.member,
+						textChannel: message.channel,
+						message,
+					});
+					await message.react('✅');
+				}
+				catch (err) {
+					console.log(err);
+				}
 			}
 		}
 		catch (err) {
