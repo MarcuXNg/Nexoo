@@ -2,11 +2,11 @@ const config = require('../../config.json');
 const client = require('../../index.js');
 const Discord = require('discord.js');
 
-client.on('messageCreate', async message => {
+client.on('messageCreate', async (message, member) => {
 	// ko cho bot khác sử dụng bot
 	if (message.author.bot) return;
 	// không cho người dùng sử dụng bot trong direct message
-	if (!message.guild) return;
+	if (!message.guild) return member.send('Please use the bot in the servers');
 	const prefix = config.prefix;
 	// nếu tin nhắn không bắt đầu với prefix thì bỏ luôn
 	if (!message.content.startsWith(prefix)) return;
@@ -25,10 +25,5 @@ client.on('messageCreate', async message => {
 			});
 		}
 		command.run(client, message, args);
-	}
-    // voiceconnection
-	const voiceChannel = message.member.voice.channel;
-	if (!message.guild.me.voice.channel) {
-		await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
 	}
 });
