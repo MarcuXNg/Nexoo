@@ -29,7 +29,7 @@ module.exports = {
 			}
 			else {
 				try {
-					if (!voiceChannel) {
+					if (!message.guild.me.voice.channel) {
 						await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
 					}
 					await client.distube.play(message.member.voice.channel, SearchString, {
