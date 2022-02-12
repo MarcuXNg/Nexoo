@@ -28,13 +28,12 @@ module.exports = {
 				});
 			}
 			else {
-				await message.react('✅');
 				await client.distube.play(message.member.voice.channel, SearchString, {
 					member: message.member,
 					textChannel: message.channel,
 					message,
 				});
-
+				await message.react('✅');
 			}
 		}
 		catch (err) {
