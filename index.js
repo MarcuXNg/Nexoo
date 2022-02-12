@@ -64,6 +64,7 @@ client.distube = new DisTube(client, {
 		}),
 		new SoundCloudPlugin(),
 		new YtDlpPlugin({
+			youtubeCookie: 'AaMTSJNlGTqsYvMa',
 			highWaterMark: 1024 * 1024 * 64,
 			quality: 'highestaudio',
 			format: 'audioonly',
