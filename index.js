@@ -42,6 +42,7 @@ const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { YtDlpPlugin } = require('@distube/yt-dlp');
 const { DisTube } = require('distube');
 client.distube = new DisTube(client, {
+	searchSongs: 5,
 	emitNewSongOnly: false,
 	savePreviousSongs: true,
 	leaveOnEmpty: true,
