@@ -189,7 +189,7 @@ module.exports = {
 						catch (e) {
 							message.channel.send({
 								embeds: [
-									new Discord.MessageEmbed().setColor('RANDOM').setDescription('❌ | **Plz try again later!**')],
+									new Discord.MessageEmbed().setColor('RANDOM').setDescription('❌ | **Please try again later!**')],
 							});
 							console.error(e);
 						}
@@ -249,7 +249,7 @@ module.exports = {
 							embeds: [
 								new Discord.MessageEmbed()
 									.setColor('RANDOM')
-									.setDescription('**plz choose again**') ],
+									.setDescription('**please choose again**') ],
 						});
 					}
 					if (collected.first().content > 6) {
@@ -257,7 +257,7 @@ module.exports = {
 							embeds: [
 								new Discord.MessageEmbed()
 									.setColor('RANDOM')
-									.setDescription('**plz choose again**') ],
+									.setDescription('**please choose again**') ],
 						});
 					}
 					if (isNaN(`${collected.first().content}`)) {
@@ -265,7 +265,7 @@ module.exports = {
 							embeds: [
 								new Discord.MessageEmbed()
 									.setColor('RANDOM')
-									.setDescription('**plz choose again**') ],
+									.setDescription('**please choose again**') ],
 						});
 					}
 					const selected = youtubeResults[collected.first().content - 1];
