@@ -1,13 +1,7 @@
 const { checkSameRoom } = require('../../utils');
 const config = require('../../config.json');
 const Discord = require('discord.js');
-const search = require('youtube-search');
-require('dotenv').config();
-const opts = {
-	maxResults: 5,
-	key: process.env.YOUTUBE_API,
-	type: 'video',
-};
+
 
 module.exports = {
 	name: 'play',
@@ -199,93 +193,13 @@ module.exports = {
 				catch (e) {
 					console.log(e);
 				}
-				// search for songs
-				let filter = m => m.author.id === message.author.id;
-				const text = args.join(' ');
-				const newmsg = await message.channel.send({ embeds: [new Discord.MessageEmbed().setColor('LUMINOUS_VIVID_PINK').setDescription(`🔍**Searching... \`${text}\`**`)] }).catch(e => {
-					console.log(e);
+				await message.react('✅');
+				await client.distube.play(message.member.voice.channel, SearchString, {
+					member: message.member,
+					textChannel: message.channel,
+					message,
 				});
-				const results = await search(text, opts).catch(err => console.log(err));
-				if (results) {
-					const youtubeResults = results.results;
-					let i = 0;
-					const titles = youtubeResults.map(result => {
-						i++;
-						return `**${i}**` + ') ' + `**[${result.title}](${result.link})**`;
-					});
-					newmsg.edit({
-						embeds: [
-							new Discord.MessageEmbed()
-								.setColor('RANDOM')
-								.setAuthor('Song selection. Type the song number to continue', message.author.avatarURL({ dynamic: true }))
-								.setDescription(titles.join('\n'))
-								.setThumbnail('https://i.imgur.com/FWKIR7N.png')
-								.setFooter(`This timeouts in 30 seconds. Type ${config.prefix}cancel to cancel.`, message.author.avatarURL({ dynamic: true })) ],
-					}).catch(err => { console.log(err); });
 
-					filter = m => {
-						return (m.author.id === message.author.id);
-					};
-
-					const collected = await message.channel.awaitMessages({ filter, max: 1, time: 30000 });
-					if (collected.first().content === `${config.prefix}cancel`) {
-						return newmsg.edit({
-							embeds: [
-								new Discord.MessageEmbed()
-									.setColor('RANDOM')
-									.setDescription('**Canceled!**') ],
-						});
-					}
-					if (collected.first().content.startsWith(`${config.prefix}`)) {
-						return newmsg.edit({
-							embeds: [
-								new Discord.MessageEmbed()
-									.setColor('RANDOM')
-									.setDescription('**Canceled!**') ],
-						});
-					}
-					if (collected.first().content < 1) {
-						return message.channel.send({
-							embeds: [
-								new Discord.MessageEmbed()
-									.setColor('RANDOM')
-									.setDescription('**please choose again**') ],
-						});
-					}
-					if (collected.first().content > 6) {
-						return message.channel.send({
-							embeds: [
-								new Discord.MessageEmbed()
-									.setColor('RANDOM')
-									.setDescription('**please choose again**') ],
-						});
-					}
-					if (isNaN(`${collected.first().content}`)) {
-						return message.channel.send({
-							embeds: [
-								new Discord.MessageEmbed()
-									.setColor('RANDOM')
-									.setDescription('**please choose again**') ],
-						});
-					}
-					const selected = youtubeResults[collected.first().content - 1];
-					if (!message.guild.me.voice.channel) {
-						await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
-					}
-					await message.react('✅');
-					await client.distube.play(message.member.voice.channel, selected.link, {
-						member: message.member,
-						textChannel: message.channel,
-						message,
-					});
-					await newmsg.edit({
-						embeds: [
-							new Discord.MessageEmbed()
-								.setColor('RANDOM')
-								.setTitle('Search done!')
-								.setDescription('Hope you enjoy the music ❤️') ],
-					});
-				}
 			}
 		}
 		catch (err) {
