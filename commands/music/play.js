@@ -13,7 +13,7 @@ module.exports = {
 	name: 'play',
 	aliases: ['p'],
 	category: 'music',
-	description: 'playing music',
+	description: 'playing music from youtube, soundcloud, spotify, zingmp3',
 	usage: `${config.prefix}play [song name/song url]`,
 	inVoiceChannel: true,
 	run: async (client, message, args) => {
@@ -35,6 +35,38 @@ module.exports = {
 			}
 			else {
 				try {
+					// apple music
+					const applemusic = (str) => {
+						const regex = /(http|https):\/\/(www.music.apple.com|music.apple.com)/;
+						if (!regex.test(str)) {
+							return false;
+						}
+						else {
+							return true;
+						}
+					};
+					if (applemusic(args[0])) {
+						try {
+							if (!message.guild.me.voice.channel) {
+								await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
+							}
+							await message.react('✅');
+							await client.distube.playVoiceChannel(message.member.voice.channel, args[0], {
+								member: message.member,
+								textChannel: message.channel,
+								message,
+							});
+
+						}
+						catch (e) {
+							message.channel.send({
+								embeds: [
+									new Discord.MessageEmbed().setColor('RANDOM').setDescription('❌ | **Please try again later!**')],
+							});
+							console.error(e);
+						}
+						return;
+					}
 					// zingmp3
 					const zingmp3 = (str) => {
 						const regex = /(http|https):\/\/(www.zingmp3.vn|zingmp3.vn)/;
