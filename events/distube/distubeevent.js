@@ -13,7 +13,7 @@ client.distube
 				.setColor('RANDOM')
 				.setThumbnail(`${song.thumbnail}`)
 				.setAuthor('Now playing', config.iconURL)
-				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)} \n ╰🔉VoiceChannel: <#${client.VoiceChannel.id}>`)
+				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)} \n ╰🔉VoiceChannel: <#${voiceChannel.id}>`)
 				.setFields(
 					{
 						name: '╰🙆‍♂️ Requested By',
