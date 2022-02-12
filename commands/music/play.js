@@ -193,8 +193,13 @@ module.exports = {
 				catch (e) {
 					console.log(e);
 				}
+				const video = await client.disTube?.search(SearchString, {
+					limit: 5,
+					type: 'video',
+					safeSearch: true,
+				});
 				await message.react('✅');
-				await client.distube.play(message.member.voice.channel, SearchString, {
+				await client.distube.play(message.member.voice.channel, video, {
 					member: message.member,
 					textChannel: message.channel,
 					message,
