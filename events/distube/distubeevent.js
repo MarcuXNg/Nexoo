@@ -141,6 +141,10 @@ client.distube
 		embeds: [
 			new Discord.MessageEmbed().setColor('RANDOM').setDescription('📣 Finished playing current queue! I hope you enjoyed it :heart:')],
 	}))
+	.on('disconnect', queue => queue.textChannel.send({
+		embeds: [
+			new Discord.MessageEmbed().setColor('RANDOM').setDescription('📣 I was disconnected from the voiceChannel')],
+	}))
 	.on('noRelated', queue => queue.textChannel.send({
 		embeds: [
 			new Discord.MessageEmbed().setColor('RANDOM').setDescription('📣 Can\'t find related video to play.')],
