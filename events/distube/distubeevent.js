@@ -3,7 +3,6 @@ const Discord = require('discord.js');
 const config = require('../../config.json');
 
 // distube events
-const voiceChannel = client.message.member.voice.channel;
 const status = queue =>
 	`**Volume:** \`${queue.volume}%\` | **Filter:** \`${queue.filters.join(', ') || 'Off'}\` | **Loop:** \`${queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
 	}\` | **Autoplay:** \`${queue.autoplay ? 'On' : 'Off'}\``;
@@ -14,7 +13,7 @@ client.distube
 				.setColor('RANDOM')
 				.setThumbnail(`${song.thumbnail}`)
 				.setAuthor('Now playing', config.iconURL)
-				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)} \n ╰🔉VoiceChannel: <#${voiceChannel.id}>`)
+				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)} \n ╰🔉VoiceChannel: <#${client.VoiceChannel.id}>`)
 				.setFields(
 					{
 						name: '╰🙆‍♂️ Requested By',
