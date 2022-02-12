@@ -13,7 +13,7 @@ client.distube
 				.setColor('RANDOM')
 				.setThumbnail(`${song.thumbnail}`)
 				.setAuthor('Now playing', config.iconURL)
-				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)} \n **╰** 🔉**VoiceChannel**: <#${queue.voiceChannel.id}> - :hourglass: **Ping**: \`${client.ws.ping}\` ms.`)
+				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)} \n **╰** 🔉**VoiceChannel**: <#${queue.voiceChannel.id}> - :hourglass: **Ping**: \`${client.ws.ping}\` ms. \n **╰** 😪 **Next Related Song**: [${song.related}](${song.related.url})`)
 				.setFields(
 					{
 						name: '╰ 🙆‍♂️ Requested By',
@@ -159,7 +159,7 @@ client.distube
 						.setColor('RANDOM')
 						.setAuthor('Song selection. Type the song number to continue', message.author.avatarURL({ dynamic: true }))
 						.setDescription(`${result
-							.map(song => `**${++i}**. **[${song.name}](${song.url})** - \`${song.formattedDuration}\``)
+							.map(song => `**${++i}**. **[${song.name}](${song.url})** (${song.views}) - \`${song.formattedDuration}\``)
 							.join('\n')}`)
 						.setThumbnail('https://i.imgur.com/FWKIR7N.png')
 						.setFooter(`This timeouts in 60 seconds. Type ${config.prefix}cancel or wait to cancel.`, message.author.avatarURL({ dynamic: true })) ],
