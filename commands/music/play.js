@@ -29,14 +29,14 @@ module.exports = {
 			}
 			else {
 				try {
-					await client.distube.play(message.member.voice.channel, SearchString, {
-						member: message.member,
-						textChannel: message.channel,
-						message,
-					});
 					// voiceconnection
 					if (!message.guild.me.voice.channel) {
-						message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
+						await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
+						await client.distube.play(message.member.voice.channel, SearchString, {
+							member: message.member,
+							textChannel: message.channel,
+							message,
+						});
 					}
 				}
 				catch (err) {
