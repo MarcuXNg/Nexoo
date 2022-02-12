@@ -50,7 +50,7 @@ client.distube = new DisTube(client, {
 	leaveOnFinish: true,
 	leaveOnStop: true,
 	youtubeDL: false,
-	emitAddSongWhenCreatingQueue: true,
+	emitAddSongWhenCreatingQueue: false,
 	emitAddListWhenCreatingQueue: true,
 	updateYouTubeDL: true,
 	youtubeCookie: process.env.YOUTUBECOOKIE,
