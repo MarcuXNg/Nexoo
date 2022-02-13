@@ -1,5 +1,7 @@
 // clear the console
 console.clear();
+
+// import env file
 require('dotenv').config();
 
 // OAuth2
@@ -18,6 +20,7 @@ app.get('/', async (req, res) => {
 // import modules
 const { readdirSync } = require('fs');
 const Discord = require('discord.js');
+const mongoose = require('mongoose');
 
 const client = new Discord.Client({
 	intents: [
@@ -41,6 +44,7 @@ const { SpotifyPlugin } = require('@distube/spotify');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { YtDlpPlugin } = require('@distube/yt-dlp');
 const { DisTube } = require('distube');
+
 client.distube = new DisTube(client, {
 	searchSongs: 5,
 	// emit replayed song
@@ -90,8 +94,8 @@ client.distube = new DisTube(client, {
 	],
 });
 
+// for events file
 module.exports = client;
-
 // client variables to use anywhere
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
@@ -100,6 +104,16 @@ client.categories = readdirSync('./commands/');
 client.cooldowns = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
 client.maps = new Map();
+
+// mongoose database
+mongoose.connect(process.env.dbToken, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+}).then(() => {
+	console.log('Connected to database.');
+}).catch((e) => {
+	console.log(e);
+});
 
 // Loading files, with the client variable like Command Handler, Event Handler, ...
 ['command', 'event', 'slashcommand'].forEach(handler => {
