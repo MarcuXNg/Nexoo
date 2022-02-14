@@ -47,7 +47,7 @@ client.distube
 					},
 				)
 				.setTimestamp()
-				.setFooter('Type >play to play music', song.user.displayAvatarURL({ dynamic: true }))],
+				.setFooter('><', song.user.displayAvatarURL({ dynamic: true }))],
 		},
 		),
 	)
