@@ -43,7 +43,7 @@ function getAll(client, message) {
 		.setFields(
 			{
 				name: '✨ Support',
-				value: `[Kyen's Gang](https://dsc.gg/kyensgang)`,
+				value: '[Kyen\'s Gang](https://dsc.gg/kyensgang)',
 				inline: true,
 			},
 			{
