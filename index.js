@@ -28,6 +28,7 @@ const client = new Discord.Client({
 		'GUILD_MESSAGES',
 		'GUILD_VOICE_STATES',
 		'GUILD_MEMBERS',
+		'GUILD_PRESENCES',
 	],
 	allowedMentions: { repliedUser: false },
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
