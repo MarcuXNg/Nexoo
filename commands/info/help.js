@@ -28,7 +28,7 @@ function getAll(client, message) {
 			.map(cmd => `\`${prefix}${cmd.name}\` - ${cmd.description}`)
 			.join('\n');
 	};
-	const info = `There are ${client.commands.size} commands\n\n My prefix is ${config.prefix}`
+	const info = `There are ${client.commands.size} commands\n\n My prefix is ${config.prefix} \n`
 	+ client.categories
 		.map(cat => stripIndent`**${cat[0].toUpperCase() + cat.slice(1)}** [\`${client.commands
 			.filter(cmd => cmd.category === cat).size}\`] commands \n${commands(cat)}`)
