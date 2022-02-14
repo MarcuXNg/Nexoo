@@ -28,16 +28,21 @@ function getAll(client, message) {
 			.map(cmd => `\`${prefix}${cmd.name}\` - ${cmd.description}`)
 			.join('\n');
 	};
-	const info = client.categories
-		.map(cat => stripIndent`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
+	const info = `There are ${client.commands.size} commands\n\n My prefix is ${config.prefix}`
+	+ client.categories
+		.map(cat => stripIndent`**${cat[0].toUpperCase() + cat.slice(1)}** [\`${client.commands
+			.filter(cmd => cmd.category === cat).size}\`] commands \n${commands(cat)}`)
 		.reduce((string, category) => string + '\n' + category);
 
 	const embed = new MessageEmbed()
 		.setColor('RANDOM')
-		.setAuthor(`${client.user.username}'s command`, config.iconURL)
+		.setAuthor({
+			name: `${client.user.username}'s command`,
+			iconURL: config.iconURL,
+		})
 		.setFields(
 			{
-				name: '✨ Support ',
+				name: '✨ Support',
 				value: '[GitHub](https://github.com/MarcuXNg)',
 				inline: true,
 			},
@@ -46,7 +51,9 @@ function getAll(client, message) {
 				value: '[MarcuX](https://www.facebook.com/marcuxnguyen/)',
 				inline: true,
 			})
-		.setFooter(`To get info of each command type ${prefix}help [Command] | Have a nice day!`)
+		.setFooter({
+			text: `To get info of each command type ${prefix}help [Command] | Have a nice day!`,
+		})
 		.setDescription(info);
 
 	return message.channel.send({ embeds: [embed] });
