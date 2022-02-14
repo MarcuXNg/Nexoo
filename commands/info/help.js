@@ -28,7 +28,7 @@ function getAll(client, message) {
 			.map(cmd => `\`${prefix}${cmd.name}\` - ${cmd.description}`)
 			.join('\n');
 	};
-	const info = `There are ${client.commands.size} commands\n\n My prefix is ${config.prefix} \n`
+	const info = `There are \`${client.commands.size}\` commands \n\n My **prefix** is \`${config.prefix}\` \n`
 	+ client.categories
 		.map(cat => stripIndent`**${cat[0].toUpperCase() + cat.slice(1)}** [\`${client.commands
 			.filter(cmd => cmd.category === cat).size}\`] commands \n${commands(cat)}`)
@@ -43,14 +43,25 @@ function getAll(client, message) {
 		.setFields(
 			{
 				name: '✨ Support',
-				value: '[GitHub](https://github.com/MarcuXNg)',
+				value: `[Kyen's Gang](https://dsc.gg/kyensgang)`,
 				inline: true,
 			},
 			{
 				name: '🙏 By',
 				value: '[MarcuX](https://www.facebook.com/marcuxnguyen/)',
 				inline: true,
-			})
+			},
+			{
+				name: '😒 Invite me',
+				value: '[Nexoo](https://dsc.gg/nexoo)',
+				inline: true,
+			},
+			{
+				name: '😒 GitHub',
+				value: '[MarcuXNg](https://github.com/MarcuXNg)',
+				inline: true,
+			},
+		)
 		.setFooter({
 			text: `To get info of each command type ${prefix}help [Command] | Have a nice day!`,
 		})
