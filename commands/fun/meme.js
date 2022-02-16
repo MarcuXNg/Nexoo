@@ -16,7 +16,9 @@ module.exports = {
 						.setColor('RANDOM')
 						.setTitle(content[0].data.children[0].data.title)
 						.setImage(content[0].data.children[0].data.url)
-						.setFooter(`👍 ${content[0].data.children[0].data.ups} 👎 ${content[0].data.children[0].data.downs} | Comments : ${content[0].data.children[0].data.num_comments}`),
+						.setFooter({
+							text: `👍 ${content[0].data.children[0].data.ups} 👎 ${content[0].data.children[0].data.downs} | Comments : ${content[0].data.children[0].data.num_comments}`,
+						}),
 				],
 			},
 			);
