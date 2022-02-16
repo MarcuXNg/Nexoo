@@ -23,13 +23,9 @@ const Discord = require('discord.js');
 const mongoose = require('mongoose');
 
 const client = new Discord.Client({
-	intents: [
-		'GUILDS',
-		'GUILD_MESSAGES',
-		'GUILD_VOICE_STATES',
-		'GUILD_MEMBERS',
-		'GUILD_PRESENCES',
-	],
+	// import all intents
+	intents: 32767,
+	// disable replied user
 	allowedMentions: { repliedUser: false },
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 	messageCacheMaxSize: 10,
@@ -47,6 +43,7 @@ const { YtDlpPlugin } = require('@distube/yt-dlp');
 const { DisTube } = require('distube');
 
 client.distube = new DisTube(client, {
+	// the amount of songs to be search in search results
 	searchSongs: 5,
 	// emit replayed song
 	emitNewSongOnly: false,
@@ -76,9 +73,11 @@ client.distube = new DisTube(client, {
 		// spotify
 		new SpotifyPlugin({
 			parallel: true,
-			emitEventsAfterFetching: false,
+			emitEventsAfterFetching: true,
 			api: {
+				// spotify client id
 				clientId: process.env.SPOTIFY_CLIENTID,
+				// spotify client secret
 				clientSecret: process.env.SPOTIFY_CLIENTSECRET,
 			},
 		}),
