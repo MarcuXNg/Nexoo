@@ -13,7 +13,7 @@ module.exports = {
 		try {
 			axios
 				.get(`https://sagiri-fansub.tk/api/v1/userinfo/${member.user.id}`)
-				.then((res) => {
+				.then(async (res) => {
 					// console.log(res.data.data);
 					const embed = new MessageEmbed()
 						.setAuthor({
@@ -70,42 +70,14 @@ module.exports = {
 								value: `╰ ${member.presence?.activities}`,
 								inline: true,
 							},
-							{
-								name: 'Facebook',
-								value: `╰ ${res.data.data.connected_accounts.map(fb => fb.name)[0]}`,
-								inline: true,
-							},
-							{
-								name: 'GitHub',
-								value: `╰ ${res.data.data.connected_accounts.map(gh => gh.name)[1]}`,
-								inline: true,
-							},
-							{
-								name: 'Reddit',
-								value: `╰ ${res.data.data.connected_accounts.map(rd => rd.name)[2]}`,
-								inline: true,
-							},
-							{
-								name: 'Steam',
-								value: `╰ ${res.data.data.connected_accounts.map(st => st.name)[3]}`,
-								inline: true,
-							},
-							{
-								name: 'Twitch',
-								value: `╰ ${res.data.data.connected_accounts.map(tc => tc.name)[4]}`,
-								inline: true,
-							},
-							{
-								name: 'Twitter',
-								value: `╰ ${res.data.data.connected_accounts.map(tw => tw.name)[5]}`,
-								inline: true,
-							},
-							{
-								name: 'Youtube',
-								value: `╰ ${res.data.data.connected_accounts.map(yt => yt.name)[6]}`,
-								inline: true,
-							},
 						);
+					await res.data.data.connected_accounts.map((data_) => {
+						embed.addFields({
+							name: `${data_.type.toUpperCase().slice(0, 1) + data_.type.slice(1)}`,
+							value: `╰ ${data_.name}`,
+							inline: true,
+						});
+					});
 					message.channel.send({ embeds: [embed] });
 				})
 				.catch((err) => {
