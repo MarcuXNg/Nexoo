@@ -2,7 +2,6 @@ const { checkSameRoom } = require('../../utils');
 const config = require('../../config.json');
 const Discord = require('discord.js');
 
-
 module.exports = {
 	name: 'play',
 	aliases: ['p'],
@@ -29,6 +28,39 @@ module.exports = {
 			}
 			else {
 				try {
+					// Deezer
+					const Deezer = (str) => {
+						const regex = /(http|https):\/\/(www.deezer.com|deezer.com)/;
+						if (!regex.test(str)) {
+							return false;
+						}
+						else {
+							return true;
+						}
+					};
+					if (Deezer(args[0])) {
+						try {
+							if (!message.guild.me.voice.channel) {
+								await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
+							}
+							await message.react('✅');
+							await client.distube.play(message.member.voice.channel, args[0], {
+								member: message.member,
+								textChannel: message.channel,
+								message,
+							});
+
+						}
+						catch (e) {
+							message.channel.send({
+								embeds: [
+									new Discord.MessageEmbed().setColor('RANDOM').setDescription('❌ | **Please try again later!**')],
+							});
+							console.error(e);
+						}
+						return;
+					}
+
 					if (!message.guild.me.voice.channel) {
 						await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
 					}
