@@ -19,33 +19,33 @@ client.distube
 				.setDescription(`**[${song.name}](${song.url})** \n ${status(queue)} \n 🔉**VoiceChannel** \n **╰** <#${queue.voiceChannel.id}> - :hourglass: **Ping**: \`${client.ws.ping}\` ms. \n 🤨**Next Related Song** \n **╰** ${song.related.map(obj => `[${obj.name}](${obj.url})`)[0]} `)
 				.setFields(
 					{
-						name: '╰ 🙆‍♂️ Requested By',
-						value: `${song.user}`,
+						name: '🙆‍♂️ Requested By',
+						value: `╰ ${song.user}`,
 						inline: true,
 					},
 					{
-						name: '╰ ⏲️ Duration',
-						value: `\`${song.formattedDuration}\``,
+						name: '⏲️ Duration',
+						value: `╰ \`${song.formattedDuration}\``,
 						inline: true,
 					},
 					{
-						name: '╰ 👀 Views',
-						value: `\`${song.views}\``,
+						name: '👀 Views',
+						value: `╰ \`${song.views}\``,
 						inline: true,
 					},
 					{
-						name: '╰ 👍 Likes',
-						value: `\`${song.likes}\``,
+						name: '👍 Likes',
+						value: `╰ \`${song.likes}\``,
 						inline: true,
 					},
 					{
-						name: '╰ ⬆️ Uploader',
-						value: `\`${song.uploader.name}\``,
+						name: '⬆️ Uploader',
+						value: `╰ \`${song.uploader.name}\``,
 						inline: true,
 					},
 					{
-						name: '╰ 🤨 Source',
-						value: `\`${song.source}\``,
+						name: '🤨 Source',
+						value: `╰ \`${song.source}\``,
 						inline: true,
 					},
 				)
