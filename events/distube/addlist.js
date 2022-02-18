@@ -19,13 +19,13 @@ client.distube
 				.setDescription(`**[${playlist.name}](${playlist.url})** playlist \`(${playlist.songs.length} songs)\` \n ${status(queue)}`)
 				.setFields(
 					{
-						name: '╰🙆‍♂️ Requested By',
-						value: `${playlist.user}`,
+						name: '🙆‍♂️ Requested By',
+						value: `╰ ${playlist.user}`,
 						inline: true,
 					},
 					{
-						name: '╰⏲️ Duration',
-						value: `\`${playlist.formattedDuration}\``,
+						name: '⏲️ Duration',
+						value: `╰ \`${playlist.formattedDuration}\``,
 						inline: true,
 					},
 				)
