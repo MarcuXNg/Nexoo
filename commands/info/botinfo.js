@@ -1,50 +1,65 @@
 const { MessageEmbed } = require('discord.js');
-const config = require(`../../config.json`)
+const config = require('../../config.json');
 
 module.exports = {
-    name: "botinfo",
-    aliases: ["i"],
-    category: 'info',
-    description: "Shows an embed info of the bot",
-    usage: `${config.prefix}botinfo`,
-    run: (client, message, args) => {
-        try {
-            const embed = new MessageEmbed();
+	name: 'botinfo',
+	aliases: ['i'],
+	category: 'info',
+	description: 'Shows an embed info of the bot',
+	usage: `${config.prefix}botinfo`,
+	run: (client, message) => {
+		try {
+			const embed = new MessageEmbed();
 
-            embed
-                .setAuthor(
-                    message.author.username,
-                    message.author.avatarURL({ dynamic: true }),
-                    "https://www.facebook.com/marcuxnguyen/"
-                )
-                .setDescription(
-                    `Support me >< \n **Contact:** \n [**MarcuX**](https://www.facebook.com/marcuxnguyen/)**,** [**SPARKA**](https://www.facebook.com/ducthanhh.nguyenn)`
-                )
-                .setColor("BLURPLE")
-                .setThumbnail("https://dankmemer.lol/gif/pepe-dancing.gif")
-                .setTimestamp(message.createdTimestamp - 36000)
-                .setFields(
-                    {
-                        name: "Name",
-                        value: `[*${client.user.username}*](https://discord.com/oauth2/authorize?client_id=932199083643379742&scope=bot&permissions=1099511627775)`,
-                        inline: true
-                    },
-                    {
-                        name: "Version",
-                        value: "1.0.0",
-                        inline: true
-                    },
+			embed
+				.setAuthor({
+					name: client.user.username,
+					iconURL: client.user.displayAvatarURL({ dynamic: true }),
+					url: config.invite,
+				})
+				.setDescription(
+					`Support me >< \n **Support Server:** [Join here](${config.serversupport})`,
+				)
+				.setColor('BLURPLE')
+				.setThumbnail(config.botinfo)
+				.setImage('https://media1.giphy.com/media/4QxQgWZHbeYwM/giphy.gif?cid=790b761172db360c0cc20df4038c645f4b53530b5b89b112&rid=giphy.gif&ct=g')
+				.setTimestamp()
+				.setFooter({
+					text: 'Wish u have good experience with the bot',
+					iconURL: message.author.avatarURL({ dynamic: true }),
+				})
+				.setFields(
+					{
+						name: 'License',
+						value: '[MIT](https://en.wikipedia.org/wiki/MIT_License)',
+						inline: true,
+					},
+					{
+						name: 'Version',
+						value: '2.0.0',
+						inline: true,
+					},
+					{
+						name: 'By',
+						value: '[**MarcuX**](https://www.facebook.com/marcuxnguyen/) \n [**SPARKA**](https://www.facebook.com/ducthanhh.nguyenn)',
+						inline: true,
+					},
+					{
+						name: 'Github',
+						value: `[MarcuXNg](${config.github})`,
+						inline: true,
+					},
+					{
+						name: 'Instagram',
+						value: `[Follow me](${config.instagram})`,
+						inline: true,
+					},
+				);
+			message.channel.send({ embeds: [embed] });
+		}
+		catch (err) {
+			console.log(err);
+		}
+	},
 
-                    {
-                        name: "By",
-                        value: "[*MarcuX*](https://www.facebook.com/marcuxnguyen/) \n [*SPARKA*](https://www.facebook.com/ducthanhh.nguyenn)",
-                        inline: true
-                    }
-                );
-            message.channel.send({ embeds: [embed] });
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-}
+};
