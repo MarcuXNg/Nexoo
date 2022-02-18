@@ -23,7 +23,7 @@ module.exports = {
 					new MessageEmbed()
 						.setColor('RANDOM')
 						.setAuthor({
-							name: 'LeaderBoard',
+							name: 'LeaderBoard 👑',
 						})
 						.setDescription(`${lb.join('\n\n')}`)
 						.setTimestamp(),
