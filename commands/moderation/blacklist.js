@@ -28,7 +28,7 @@ module.exports = {
 			});
 			try {
 				await profile.save();
-				message.channel.send('Banned ' + mentionedMember + 'from using the bot.');
+				message.channel.send(`Banned ${mentionedMember} from using the bot.`);
 			}
 			catch (e) {
 				console.log(e);
