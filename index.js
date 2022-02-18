@@ -105,6 +105,8 @@ client.cooldowns = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
 client.maps = new Map();
 
+const Levels = require('discord-xp');
+Levels.setURL(process.env.dbToken);
 // Loading files, with the client variable like Command Handler, Event Handler, ...
 ['command', 'event', 'slashcommand'].forEach(handler => {
 	require(`./handlers/${handler}`)(client);
