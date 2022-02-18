@@ -1,7 +1,6 @@
 const { checkSameRoom } = require('../../utils');
 const config = require('../../config.json');
 const Discord = require('discord.js');
-const { joinVoiceChannel } = require('@discordjs/voice');
 
 module.exports = {
 	name: 'play',
@@ -44,11 +43,6 @@ module.exports = {
 							if (!message.guild.me.voice.channel) {
 								await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
 							}
-							joinVoiceChannel({
-								channelId: message.member.voice.channel.id,
-								guildId: message.guild.id,
-								adapterCreator: message.guild.voiceAdapterCreator,
-							});
 							await message.react('✅');
 							await client.distube.play(message.member.voice.channel, args[0], {
 								member: message.member,
@@ -66,11 +60,6 @@ module.exports = {
 						}
 						return;
 					}
-					joinVoiceChannel({
-						channelId: message.member.voice.channel.id,
-						guildId: message.guild.id,
-						adapterCreator: message.guild.voiceAdapterCreator,
-					});
 					if (!message.guild.me.voice.channel) {
 						await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
 					}
