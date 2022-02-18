@@ -6,7 +6,7 @@ module.exports = {
 	aliases: ['rp, loop'],
 	category: 'music',
 	description: 'repeat',
-	usage: `${config.prefix}repeat <song/queue/off>`,
+	usage: `${config.prefix}loop <song/queue/off>`,
 	inVoiceChannel: true,
 	run: async (client, message, args) => {
 		try {
