@@ -2,8 +2,8 @@ const { checkSameRoom } = require('../../utils');
 const Discord = require('discord.js');
 const config = require('../../config.json');
 module.exports = {
-	name: 'loop',
-	aliases: ['rp, loop'],
+	name: 'repeat',
+	aliases: ['rp', 'loop'],
 	category: 'music',
 	description: 'repeat',
 	usage: `${config.prefix}loop <song/queue/off>`,
