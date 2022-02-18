@@ -3,6 +3,7 @@ const client = require('../../index.js');
 const Discord = require('discord.js');
 const axios = require('axios');
 const Levels = require('discord-xp');
+const Blacklist = require('../../database/models/blackListSchema');
 
 client.on('messageCreate', async (message, member) => {
 	// ko cho bot khác sử dụng bot
@@ -34,6 +35,11 @@ client.on('messageCreate', async (message, member) => {
 					new Discord.MessageEmbed().setColor('RANDOM').setDescription('❌ | **You must be in a voice channel to use the bot!**')],
 			});
 		}
+		if (command.devOnly == true && message.author.id !== '635358046733729792') return message.channel.send('You don\'t have the permission to use this command.');
+		const profile = await Blacklist.findOne({
+			userID: message.author.id,
+		});
+		if (profile) return message.channel.send('You cannot use the command as you are banned from using the bot');
 		command.run(client, message, args);
 	}
 });
