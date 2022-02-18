@@ -6,7 +6,7 @@ module.exports = {
 	category: 'info',
 	description: 'show ping in ms',
 	usage: `${config.prefix}ping`,
-	run: (client, message, args) => {
+	run: (client, message) => {
 		try {
 			const embed = new Discord.MessageEmbed();
 
