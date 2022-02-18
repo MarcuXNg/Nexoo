@@ -18,7 +18,7 @@ module.exports = {
 						embeds: [ new MessageEmbed()
 							.setAuthor({
 								name: 'Corona tracking Worldwide',
-								iconURL: 'https://raw.githubusercontent.com/MarcuXNg/Nexoo/main/assets/corona.png?token=GHSAT0AAAAAABQGIEUIFX3ADGKWVYTWH3TAYQN5FPA',
+								iconURL: config.covid,
 							})
 							.setFooter({
 								text: 'stay home stay safe',
@@ -88,8 +88,6 @@ module.exports = {
 
 							),
 						] });
-
-					console.log(res.data);
 				});
 		}
 		catch (err) {
