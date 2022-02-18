@@ -13,7 +13,7 @@ module.exports = {
 			const target = await Levels.fetch(mentionedMember.user.id, message.guild.id);
 			if (!target) return message.channel.send('The member stated does not have any levels within the server.');
 			try {
-				message.channel.send(`${mentionedMember.user.tag} is level ${target.level} and has ${target.xp}/${Levels.xpFor(target.level + 1)}`);
+				message.channel.send(`${mentionedMember} is level ${target.level} and has ${target.xp}/${Levels.xpFor(target.level + 1)}`);
 			}
 			catch (e) {
 				console.log(e);
