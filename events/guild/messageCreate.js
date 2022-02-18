@@ -16,7 +16,7 @@ client.on('messageCreate', async (message, member) => {
 	const hasLeveledUP = await Levels.appendXp(message.author.id, message.guild.id, randomXP);
 	if (hasLeveledUP) {
 		const user = await Levels.fetch(message.author.id, message.guild.id);
-		message.channel.send(`${message.member}, you have proceeded to level ${user.level}. Continue your work within the server.`);
+		message.channel.send(`GG ${message.member}, you just advanced to level ${user.level}!🎉. Continue your work within the server.`);
 	}
 	// nếu tin nhắn không bắt đầu với prefix thì chạy function
 	if (!message.content.startsWith(prefix)) return await chatbot(message);
