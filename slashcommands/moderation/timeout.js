@@ -33,7 +33,7 @@ module.exports = {
 
 		try {
 			await member.timeout(duration * 1000, reason);
-			interaction.channel.send({ content: `${user} has been put in timeout` });
+			interaction.channel.send({ content: `${user} has been put in timeout (${duration} minute(s)) for ${reason}` });
 		}
 		catch (e) {
 			console.log(e);
