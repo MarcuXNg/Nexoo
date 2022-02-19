@@ -9,7 +9,7 @@ module.exports = {
 	description: 'show the current playing song',
 	usage: `${config.prefix}nowplaying`,
 	inVoiceChannel: true,
-	run: async (client, message, args) => {
+	run: async (client, message) => {
 		try {
 			if (checkSameRoom(message)) return;
 			const queue = client.distube.getQueue(message);
@@ -140,7 +140,7 @@ module.exports = {
 							.setDescription(`${info}`);
 						if (i < 20) {
 							embed.setAuthor('Queue', config.iconURL);
-							embed.setTitle(`📑 **${theSongs.length > 10000 ? 10000 : theSongs.length}songs **`);
+							embed.setTitle(`📑 **${theSongs.length > 10000 ? 10000 : theSongs.length} songs **`);
 							embed.setDescription(`✨**Now playing**✨ **[${theSongs[0].name}](${theSongs[0].url})** - \`${theSongs[0].formattedDuration}\`\n\n${info}`);
 						}
 						embeds.push(embed);
@@ -159,9 +159,9 @@ module.exports = {
 						.addOptions([
 							pages.map((page, index) => {
 								const Obj = {};
-								Obj.label = `Page ${index}`;
+								Obj.label = `Page ${index + 1}`;
 								Obj.value = `${index}`;
-								Obj.description = `Page ${index}/${pages.length - 1}`;
+								Obj.description = `Page ${index + 1}/${pages.length}`;
 								return Obj;
 							}),
 						]);
