@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const config = require('../../config.json');
+const { version } = require('discord.js');
 
 module.exports = {
 	name: 'botinfo',
@@ -18,7 +19,7 @@ module.exports = {
 					url: config.invite,
 				})
 				.setDescription(
-					`Support me >< \n **Support Server:** [Join here](${config.serversupport})`,
+					`🤷‍♂️ Support me >< \n **Support Server:** [Join here](${config.serversupport})`,
 				)
 				.setColor('BLURPLE')
 				.setThumbnail(config.botinfo)
@@ -29,6 +30,11 @@ module.exports = {
 					iconURL: message.author.avatarURL({ dynamic: true }),
 				})
 				.setFields(
+					{
+						name: '🤖 Name',
+						value: `\`${client.user.username}\``,
+						inline: true,
+					},
 					{
 						name: 'License',
 						value: '[MIT](https://en.wikipedia.org/wiki/MIT_License)',
@@ -52,6 +58,31 @@ module.exports = {
 					{
 						name: 'Instagram',
 						value: `[Follow me](${config.instagram})`,
+						inline: true,
+					},
+					{
+						name: '🔗 Node.js version',
+						value: process.version,
+						inline: true,
+					},
+					{
+						name: '🔗 Discord.js Version',
+						value: version,
+						inline: true,
+					},
+					{
+						name: '📂 Channels',
+						value: `\`${client.channels.cache.size} Channels\``,
+						inline: true,
+					},
+					{
+						name: '👨‍👧‍👧 Users',
+						value: `\`${client.users.cache.size} Users\``,
+						inline: true,
+					},
+					{
+						name: '🏓 Ping',
+						value: `\`${client.ws.ping}ms\``,
 						inline: true,
 					},
 				);
