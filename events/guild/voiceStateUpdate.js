@@ -1,4 +1,4 @@
-const client = require('../index');
+const client = require('../../index');
 
 client.on('voiceStateUpdate', async (oldState, newState) => {
 	if (!newState.guild || newState.member.user.bot) return;
