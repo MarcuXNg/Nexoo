@@ -47,6 +47,7 @@ client.on('messageCreate', async (message) => {
 	let command = client.commands.get(cmd);
 	if (!command) command = client.commands.get(client.aliases.get(cmd));
 	if (command) {
+		// music join channel to use command message create
 		if (command.category === 'music' && !message.member.voice.channel) {
 			return message.channel.send({
 				embeds: [
