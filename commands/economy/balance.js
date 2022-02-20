@@ -5,7 +5,7 @@ module.exports = {
 	category: 'economy',
 	aliases: ['balance'],
 	description: 'Check the balance of a member mentioned.',
-	usage: '`(prefix)`leaderboard',
+	usage: '`(prefix)`balance',
 	run: async (client, message, args) => {
 		try {
 			const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;
