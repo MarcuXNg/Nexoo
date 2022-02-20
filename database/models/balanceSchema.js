@@ -5,5 +5,6 @@ const balanceSchema = new mongoose.Schema({
 	guildID: String,
 	lastEdited: String,
 	balance: { type: Number, default: 0 },
+	daily: { type: Number },
 });
 module.exports = new mongoose.model('Balance', balanceSchema, 'balances');
