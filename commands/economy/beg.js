@@ -5,7 +5,7 @@ module.exports = {
 	category: 'economy',
 	aliases: ['beg'],
 	description: 'Has a chance of giving coins to users.',
-	usage: '`(prefix)`leaderboard',
+	usage: '`(prefix)`beg',
 	run: async (client, message) => {
 		try {
 			const chance = Math.floor(Math.random() * 10) + 1;
