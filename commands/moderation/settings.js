@@ -28,11 +28,11 @@ module.exports = {
 				if (!args[1]) return message.channel.send('You did not state a value to update the property to.');
 				if (args[0] === 'prefix') {
 					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { prefix: args[1], lastEdited: Date.now() });
-					message.channel.send(`Updated: ${args[0]} to ${args[1]} `);
+					message.channel.send(`**Updated:** ${args[0]} to \`${args[1]}\``);
 				}
 				else if (args[0] === 'memberRoleID') {
 					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { memberRoleID: args[1], lastEdited: Date.now() });
-					message.channel.send(`Updated: ${args[0]} to ${args[1]} `);
+					message.channel.send(`**Updated:** ${args[0]} to \`${args[1]}\``);
 				}
 			}
 		}
