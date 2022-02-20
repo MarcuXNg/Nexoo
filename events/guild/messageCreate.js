@@ -49,7 +49,7 @@ client.on('messageCreate', async (message) => {
 	if (message.mentions.members.first()) {
 		await message.mentions.members.forEach(async member => {
 			const afkProfile = await Afk.findOne({ userID: message.author.id });
-			if (afkProfile) message.channel.send(`${member} is in AFK mode for \`${afkProfile.reason}`);
+			if (afkProfile) message.channel.send(`${member} is in AFK mode for \`${afkProfile.reason}\``);
 		});
 	}
 	// nếu tin nhắn không bắt đầu với prefix thì chạy function
