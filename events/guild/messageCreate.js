@@ -1,24 +1,39 @@
-const config = require('../../config.json');
 const client = require('../../index.js');
 const Discord = require('discord.js');
 const axios = require('axios');
 const Levels = require('discord-xp');
 const Blacklist = require('../../database/models/blackListSchema');
 const Afk = require('../../database/models/afkSchema');
+const Guild = require('../../database/models/guildSchema');
+const Balance = require('../../database/models/balanceSchema');
 
 client.on('messageCreate', async (message) => {
 	// ko cho bot khác sử dụng bot
 	if (message.author.bot) return;
 	// không cho người dùng sử dụng bot trong direct message
 	if (!message.guild) return;
-	// const prefix from config.json
-	const prefix = config.prefix;
+	// const prefix from client default prefix
+	const prefix = client.prefix;
 	// discord-xp
 	const randomXP = Math.floor(Math.random() * 29) + 1;
 	const hasLeveledUP = await Levels.appendXp(message.author.id, message.guild.id, randomXP);
 	if (hasLeveledUP) {
 		const user = await Levels.fetch(message.author.id, message.guild.id);
 		message.channel.send(`GG ${message.member}, you just advanced to level ${user.level}!🎉. Continue your work within the server.`);
+	}
+	// settings
+	const guildProfile = await Guild.findOne({ guildID: message.guild.id }) || await new Guild({ guildID: message.guild.id });
+	await guildProfile.save().catch(err => console.log(err));
+	client.prefix = guildProfile.prefix;
+	// balance
+	// eslint-disable-next-line no-inline-comments
+	const RandomAmountOfCoins = Math.floor(Math.random() * 10) + 5; // 5-15
+	// eslint-disable-next-line no-inline-comments
+	const messageGive = Math.floor(Math.random() * 10) + 1; // 1-10
+	if (messageGive >= 2 && messageGive <= 5) {
+		const balanceProfile = await Balance.findOne({ userID: message.author.id, guildID: message.guild.id }) || await new Balance({ userID: message.author.id, guildID: message.guild.id, lastEdited: Date.now() });
+		await balanceProfile.save().catch(err => console.log(err));
+		await Balance.findOneAndUpdate({ userID: message.author.id, guildID: message.guild.id }, { balance: balanceProfile.balance + RandomAmountOfCoins, lastEdited: Date.now() });
 	}
 	// afk
 	if (await Afk.findOne({ userID: message.author.id })) {
