@@ -15,7 +15,7 @@ module.exports = {
 				{
 					type: 'WATCHING',
 					content: `${client.channels.cache.size} channels`,
-					status: 'invisible',
+					status: 'online',
 				},
 				{
 					type: 'PLAYING',
