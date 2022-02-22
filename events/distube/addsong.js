@@ -51,7 +51,7 @@ client.distube
 				)
 				.setTimestamp()
 				.setFooter({
-					text: `Type ${config.prefix}p [songname or url] to play music`,
+					text: `Type ${client.prefix}p [songname or url] to play music`,
 					iconURL: song.user.displayAvatarURL({ dynamic: true }),
 				})],
 		},
