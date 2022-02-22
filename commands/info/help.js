@@ -1,5 +1,4 @@
-const { MessageEmbed } = require('discord.js');
-const { stripIndent } = require('common-tags');
+const { MessageEmbed, MessageActionRow, MessageSelectMenu, MessageButton } = require('discord.js');
 const config = require('../../config.json');
 
 
@@ -8,70 +7,117 @@ module.exports = {
 	aliases: ['h'],
 	category: 'info',
 	description: 'Information about the bot',
-	usage: `${config.prefix}help [command]`,
+	usage: '(prefix)help [command]',
 	run: async (client, message, args) => {
 		try {
 			if (!args[0]) return getAll(client, message);
-			return getCMD(client, message, args[0]);
+			else return getCMD(client, message, args[0]);
 		}
 		catch (err) {
 			console.log(err);
 		}
 	},
 };
-
 function getAll(client, message) {
-	const prefix = config.prefix;
-	const commands = (category) => {
-		return client.commands
-			.filter(cmd => cmd.category === category)
-			.map(cmd => `\`${prefix}${cmd.name}\` - ${cmd.description}`)
-			.join('\n');
+	const emoji = {
+		economy : '💵',
+		fun : '🤡',
+		info : 'ℹ️',
+		level : '🧪',
+		moderation : '🔨',
+		music : '🎵',
+		nsfw : '🔞',
 	};
-	const info = `There are \`${client.commands.size}\` commands \n\n My **prefix** is \`${config.prefix}\` \n`
-	+ client.categories
-		.map(cat => stripIndent`**${cat[0].toUpperCase() + cat.slice(1)}** [\`${client.commands
-			.filter(cmd => cmd.category === cat).size}\`] commands \n${commands(cat)}`)
-		.reduce((string, category) => string + '\n' + category);
-
+	const cate = client.categories
+		.map(cat => cat[0].toUpperCase() + cat.slice(1));
+	const info = `There are \`${client.commands.size}\` commands \n\n My **prefix** is \`${client.prefix}\``;
 	const embed = new MessageEmbed()
-		.setColor('RANDOM')
 		.setAuthor({
-			name: `${client.user.username}'s command`,
-			iconURL: config.iconURL,
+			name: client.user.username,
+			iconURL: client.user.displayAvatarURL({ dynamic: true }),
 		})
-		.setFields(
-			{
-				name: '✨ Support',
-				value: '[Kyen\'s Gang](https://dsc.gg/kyensgang)',
-				inline: true,
-			},
-			{
-				name: '🙏 By',
-				value: '[MarcuX](https://www.facebook.com/marcuxnguyen/)',
-				inline: true,
-			},
-			{
-				name: '😒 Invite me',
-				value: '[Nexoo](https://dsc.gg/nexoo)',
-				inline: true,
-			},
-			{
-				name: '😒 GitHub',
-				value: '[MarcuXNg](https://github.com/MarcuXNg)',
-				inline: true,
-			},
-		)
+		.setDescription(info)
 		.setFooter({
-			text: `To get info of each command type ${prefix}help [Command] | Have a nice day!`,
+			text: `To get info of each command type ${client.prefix}help [Command] | Have a nice day!`,
+			iconURL: message.author.displayAvatarURL({ dynamic: true }),
 		})
-		.setDescription(info);
+		.setColor('RANDOM')
+		.setTimestamp();
+	embed.addFields(cate.map(data => {
+		const i = data.toUpperCase().slice(0, 1) + data.slice(1);
+		return {
+			name: i,
+			value: `${client.commands
+				.filter(cmd => cmd.category === i).size}`,
+			inline: true,
+		};
+	},
+	));
 
-	return message.channel.send({ embeds: [embed] });
+	const raw = new MessageActionRow().addComponents([
+		new MessageSelectMenu()
+			.setCustomId('Help Menu')
+			.setPlaceholder('Click here to see each category')
+			.addOptions([
+				client.categories.map(cat => {
+					return {
+						label: `${cat[0].toUpperCase() + cat.slice(1)}`,
+						value: cat,
+						emoji: emoji[cat],
+						description: `${client.commands.filter(cmd => cmd.category === cat).size} commands`,
+					};
+				}),
+			]),
+	]);
+	const raw2 = new MessageActionRow().addComponents([
+		new MessageButton()
+			.setCustomId('Home')
+			.setLabel('Home')
+			.setStyle('PRIMARY')
+			.setEmoji('🏡'),
+		new MessageButton()
+			.setLabel('Invite')
+			.setStyle('LINK')
+			.setURL(config.invite),
+		new MessageButton()
+			.setLabel('Github')
+			.setStyle('LINK')
+			.setURL(config.github),
+		new MessageButton()
+			.setLabel('Support server')
+			.setStyle('LINK')
+			.setURL(config.serversupport),
+	]);
+	message.channel.send({ embeds : [embed], components: [raw, raw2] }).then(async (msg) => {
+		const filter = (i) => i.user.id === message.author.id;
+		const collector = await msg.createMessageComponentCollector({ filter: filter });
+		collector.on('collect', async (i) => {
+			if (i.isSelectMenu()) {
+				if (i.customId === 'Help Menu') {
+					await i.deferUpdate().catch((e) => {console.log(e);});
+					const [ directory ] = i.values;
+					const helpembed = new MessageEmbed()
+						.setColor('RANDOM')
+						.setTitle(`${directory} - Total commands: \`${client.commands.filter(cmd => cmd.category === directory).size}\``)
+						.setDescription(`${client.commands.filter(cmd => cmd.category === directory).map(cmd => {
+							return [
+								`\`${client.prefix}${cmd.name}\`- ${cmd.description}`,
+							].join('\n');
+						}).join('\n')}\n\n- If there are any bugs please DM me [\`MarcuX#7941\`]\n- 🛠️ The bot is still in developed process so there are many **bugs**\n- Sincere apologies from \`MarcuX\` and \`SPARKA\``);
+					msg.edit({ embeds : [helpembed] });
+				}
+			}
+			if (i.isButton()) {
+				if (i.customId === 'Home') {
+					await i.deferUpdate().catch((e) => {console.log(e);});
+					msg.edit({ embeds: [embed] }).catch(e => { console.log(e);});
+				}
+			}
+		});
+	});
 }
-
 function getCMD(client, message, input) {
-	const prefix = config.prefix;
+	const prefix = client.prefix;
 	const embed = new MessageEmbed();
 	const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
 	let info = `❌ | Unable to find that command **${input.toLowerCase()}**.`;
@@ -86,7 +132,9 @@ function getCMD(client, message, input) {
 	if (cmd.usage) {
 		info += `\n**Usage**:${cmd.usage}`;
 		embed
-			.setFooter(`To get info of each command type ${prefix}help [Command] | Have a nice day!`)
+			.setFooter({
+				text: `To get info of each command type ${prefix}help [Command] | Have a nice day!`,
+			})
 			.setColor('GREEN')
 			.setDescription(info);
 	}
