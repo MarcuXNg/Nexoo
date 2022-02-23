@@ -116,6 +116,7 @@ function getAll(client, message) {
 			}
 		});
 	});
+	message.react('🍀');
 }
 function getCMD(client, message, input) {
 	const prefix = client.prefix;
