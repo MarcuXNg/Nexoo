@@ -1,7 +1,7 @@
 const client = require('../../index.js');
 
 client.on('interactionCreate', async interaction => {
-	if (interaction.isCommand() || interaction.isContextMenu()) {
+	if (interaction.isCommand()) {
 		const slashCommand = client.slashCommands.get(interaction.commandName);
 		if (!slashCommand) return;
 		try {
