@@ -1,8 +1,19 @@
 const client = require('../../index');
 const Discord = require('discord.js');
 
-client.on('guildMemberAdd', (member) => {
-	member.guild.channels.cache.find(c => c.name === 'welcome').send({
+client.on('guildMemberAdd', async (member) => {
+	const servers = await client.guilds.cache.size;
+	let channelToSend;
+	member.guild.channels.cache.forEach((channel) => {
+		if (
+			channel.type === 'GUILD_TEXT' &&
+            !channelToSend &&
+            channel.permissionsFor(member.guild.me).has('SEND_MESSAGES')
+		) channelToSend = channel;
+	});
+
+	if (!channelToSend) return;
+	channelToSend.send({
 		embeds: [
 			new Discord.MessageEmbed()
 				.setColor('RANDOM')
