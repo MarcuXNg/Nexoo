@@ -36,19 +36,20 @@ function getAll(client, message) {
 			name: client.user.username,
 			iconURL: client.user.displayAvatarURL({ dynamic: true }),
 		})
-		.setDescription(info)
+		.setTitle('Home')
 		.setFooter({
 			text: `To get info of each command type ${client.prefix}help [Command] | Have a nice day!`,
 			iconURL: message.author.displayAvatarURL({ dynamic: true }),
 		})
 		.setColor('RANDOM')
+		.setDescription(`${info}\n\n**⚙️By:**\nMarcuX\n**Notification:**\n- The bot is in beta so there are many bugs that appear suddenly\n- Please DM me as early as possible\n- Sorry for this bothering`)
 		.setTimestamp();
 	embed.addFields(cate.map(data => {
 		const i = data.toUpperCase().slice(0, 1) + data.slice(1);
 		return {
-			name: i,
+			name: `${emoji[data.toLowerCase().slice(0, 1) + data.slice(1)]} ${i}`,
 			value: `${client.commands
-				.filter(cmd => cmd.category === i).size}`,
+				.filter(cmd => cmd.category.toLowerCase() === i.toLowerCase()).size} commands `,
 			inline: true,
 		};
 	},
