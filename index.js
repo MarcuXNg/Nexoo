@@ -20,6 +20,7 @@ app.get('/', async (req, res) => {
 // import modules
 const { readdirSync } = require('fs');
 const Discord = require('discord.js');
+const config = require('./config.json');
 const mongoose = require('./database/mongoose');
 
 const client = new Discord.Client({
@@ -108,7 +109,7 @@ client.maps = new Map();
 const Levels = require('discord-xp');
 Levels.setURL(process.env.dbToken);
 // Loading files, with the client variable like Command Handler, Event Handler, ...
-['command', 'event', 'slashcommand'].forEach(handler => {
+['command', 'event', 'slashcommand', config.antiCrash ? 'antiCrash' : null].filter(Boolean).forEach(handler => {
 	require(`./handlers/${handler}`)(client);
 });
 
