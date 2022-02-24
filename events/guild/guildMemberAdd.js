@@ -19,6 +19,9 @@ client.on('guildMemberAdd', async (member) => {
 				.setColor('RANDOM')
 				.setImage('https://i.pinimg.com/originals/a5/46/45/a54645c9a2150d4278619fbf1a697a91.jpg')
 				.setDescription(`Hey ${member}, welcome to **${member.guild.name}!** \n Hope you have fun here ❤️`)
+				.setFooter({
+					text: `Watching ${servers} servers`,
+				})
 				.setTimestamp(),
 		],
 	});
