@@ -97,6 +97,7 @@ client.distube = new DisTube(client, {
 
 // for events file
 module.exports = client;
+
 // client variables to use anywhere
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
@@ -106,8 +107,10 @@ client.cooldowns = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
 client.maps = new Map();
 
+// Discord-xp
 const Levels = require('discord-xp');
 Levels.setURL(process.env.dbToken);
+
 // Loading files, with the client variable like Command Handler, Event Handler, ...
 ['command', 'event', 'slashcommand', config.antiCrash ? 'antiCrash' : null].filter(Boolean).forEach(handler => {
 	require(`./handlers/${handler}`)(client);
