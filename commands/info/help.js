@@ -151,7 +151,7 @@ function getCMD(client, message, input) {
 	if (cmd.aliases) info += `\n**Alias**: ${cmd.aliases.map(a => `\`${a}\``).join(', ')}`;
 	if (cmd.description) info += `\n** About**: ${cmd.description}`;
 	if (cmd.usage) {
-		info += `\n**Usage**:${cmd.usage}`;
+		info += `\n**Usage**: ${cmd.usage}`;
 		embed
 			.setFooter({
 				text: `To get info of each command type ${prefix}help [Command] | Have a nice day!`,
