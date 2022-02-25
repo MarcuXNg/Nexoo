@@ -10,6 +10,7 @@ module.exports = {
 	usage: '(prefix)help [command]',
 	run: async (client, message, args) => {
 		try {
+			// if there is args[0] return each cmd help message else will return homepage
 			if (!args[0]) return getAll(client, message);
 			else return getCMD(client, message, args[0]);
 		}
@@ -18,7 +19,9 @@ module.exports = {
 		}
 	},
 };
+// home
 function getAll(client, message) {
+	// the emoji for the categories
 	const emoji = {
 		economy : '💵',
 		fun : '🤡',
@@ -27,7 +30,9 @@ function getAll(client, message) {
 		moderation : '🔨',
 		music : '🎵',
 		nsfw : '🔞',
+		giveaway: '🎉',
 	};
+	// map the categories (chữ cái đầu categories viết hoa)
 	const cate = client.categories
 		.map(cat => cat[0].toUpperCase() + cat.slice(1));
 	const info = `There are \`${client.commands.size}\` commands \n\n My **prefix** is \`${client.prefix}\``;
@@ -54,6 +59,11 @@ function getAll(client, message) {
 		};
 	},
 	));
+	embed.addFields({
+		name: 'Slash Commands',
+		value: `${client.slashCommands.size} commands `,
+		inline: true,
+	});
 
 	const raw = new MessageActionRow().addComponents([
 		new MessageSelectMenu()
@@ -76,6 +86,10 @@ function getAll(client, message) {
 			.setLabel('Home')
 			.setStyle('PRIMARY')
 			.setEmoji('🏡'),
+		new MessageButton()
+			.setCustomId('Delete')
+			.setStyle('DANGER')
+			.setEmoji('💀'),
 		new MessageButton()
 			.setLabel('Invite')
 			.setStyle('LINK')
@@ -113,11 +127,16 @@ function getAll(client, message) {
 					await i.deferUpdate().catch((e) => {console.log(e);});
 					msg.edit({ embeds: [embed] }).catch(e => { console.log(e);});
 				}
+				if (i.customId === 'Delete') {
+					await i.deferUpdate().catch((e) => {console.log(e);});
+					msg.delete().catch(e => { console.log(e);});
+				}
 			}
 		});
 	});
 	message.react('🍀');
 }
+// each cmd
 function getCMD(client, message, input) {
 	const prefix = client.prefix;
 	const embed = new MessageEmbed();
