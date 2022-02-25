@@ -103,9 +103,20 @@ client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.categories = readdirSync('./commands/');
+client.slashCategories = readdirSync('./slashcommands/');
 client.cooldowns = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
 client.maps = new Map();
+
+// reconlx giveaway
+const { GiveawayClient } = require('reconlx');
+const giveaway = new GiveawayClient({
+	client,
+	mongooseConnectionString: process.env.dbToken,
+	emoji: '🎉',
+	defaultColor: '00FFF9',
+});
+client.GiveawayClient = giveaway;
 
 // Discord-xp
 const Levels = require('discord-xp');
