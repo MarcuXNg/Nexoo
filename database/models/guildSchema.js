@@ -6,5 +6,6 @@ const guildSchema = new mongoose.Schema({
 	lastEdited: String,
 	prefix: { type: String, default: config.prefix },
 	memberRoleID: { type: String, required: false },
+	welcomeChannel: { type: String },
 });
 module.exports = new mongoose.model('Guild', guildSchema, 'guilds');
