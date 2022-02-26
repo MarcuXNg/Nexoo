@@ -10,7 +10,7 @@ module.exports = {
 	run: async (client, message, args) => {
 		try {
 			if (message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
-				const usage = '`(prefix)`edit @member [xp, level] [add, set, remove] <number>';
+				const usage = `\`${client.prefix}\`edit @member [xp, level] [add, set, remove] <number>`;
 				const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 				// @member section
 				if (!args[0]) return message.channel.send(`You need to state more arguments \`${usage}\``);
