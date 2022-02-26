@@ -1,1 +1,1 @@
-worker: npm start --port 53134
+worker: npm start
