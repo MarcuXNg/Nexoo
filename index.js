@@ -7,12 +7,13 @@ require('dotenv').config();
 // OAuth2
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 53134;
 
 app.enable('trust proxy');
 app.set('etag', false);
 
-app.listen(process.env.PORT, () => {
-	console.log(`App listening at http://localhost:${process.env.PORT}`);
+app.listen(port, () => {
+	console.log(`App listening at http://localhost:${port}`);
 });
 
 app.get('/', async (req, res) => {
