@@ -20,6 +20,7 @@ module.exports = (client) => {
 			const slscommands = readdirSync(`./slashcommands/${dir}/`).filter((file) => file.endsWith('.js'));
 			for (const file of slscommands) {
 				const command = require(`../slashcommands/${dir}/${file}`);
+				if (!command || !command.data) continue;
 				slashCommands.push(command.data.toJSON());
 				if (command.data.name) {
 					client.slashCommands.set(command.data.name, command);
