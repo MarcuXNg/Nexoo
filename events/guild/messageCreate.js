@@ -19,7 +19,12 @@ client.on('messageCreate', async (message) => {
 	const hasLeveledUP = await Levels.appendXp(message.author.id, message.guild.id, randomXP);
 	if (hasLeveledUP) {
 		const user = await Levels.fetch(message.author.id, message.guild.id);
-		message.channel.send(`GG ${message.member}, you just advanced to level ${user.level}!🎉. Continue your work within the server.`);
+		const guildProfile = await Guild.findOne({ guildID: message.guild.id });
+		if (guildProfile.levelupChannel) {
+			const channel = message.guild.channels.cache.get(guildProfile.levelupChannel);
+			channel.send(`GG ${message.member}, you just advanced to level ${user.level}!🎉. Continue your work within the server.`);
+		}
+		else {message.channel.send(`GG ${message.member}, you just advanced to level ${user.level}!🎉. Continue your work within the server.`);}
 	}
 	// settings
 	const guildProfile = await Guild.findOne({ guildID: message.guild.id }) || await new Guild({ guildID: message.guild.id });
@@ -47,7 +52,7 @@ client.on('messageCreate', async (message) => {
 		}
 	}
 	if (message.mentions.members.first()) {
-		await message.mentions.members.forEach(async member => {
+		message.mentions.members.forEach(async member => {
 			const afkProfile = await Afk.findOne({ userID: message.author.id });
 			if (afkProfile) message.channel.send(`${member} is in AFK mode for \`${afkProfile.reason}\``);
 		});
@@ -58,7 +63,7 @@ client.on('messageCreate', async (message) => {
 	const cmd = args.shift().toLowerCase();
 	if (message.channel.partial) await message.channel.fetch();
 	if (message.partial) await message.fetch();
-	if (cmd.leength === 0) return;
+	if (cmd.length === 0) return;
 	let command = client.commands.get(cmd);
 	if (!command) command = client.commands.get(client.aliases.get(cmd));
 	if (command) {
@@ -69,12 +74,14 @@ client.on('messageCreate', async (message) => {
 					new Discord.MessageEmbed().setColor('RANDOM').setDescription('❌ | **You must be in a voice channel to use the bot!**')],
 			});
 		}
+		// dev-only permission
 		if (command.devOnly == true && message.author.id !== '635358046733729792') return message.channel.send('You don\'t have the permission to use this command.');
 		// blacklist
 		const profile = await Blacklist.findOne({
 			userID: message.author.id,
 		});
 		if (profile) return message.channel.send('You cannot use the command as you are banned from using the bot');
+		// run the command
 		command.run(client, message, args);
 	}
 });
