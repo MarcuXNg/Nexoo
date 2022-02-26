@@ -31,6 +31,8 @@ function getAll(client, message) {
 		music : '🎵',
 		nsfw : '🔞',
 		giveaway: '🎉',
+		settings: '⚙️',
+		discordjs: '🐟',
 	};
 	// map the categories (chữ cái đầu categories viết hoa)
 	const cate = client.categories
