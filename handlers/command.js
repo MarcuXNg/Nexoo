@@ -15,7 +15,6 @@ module.exports = (client) => {
 			const commands = readdirSync(`./commands/${dir}/`).filter((file) => file.endsWith('.js'));
 			for (const file of commands) {
 				const pull = require(`../commands/${dir}/${file}`);
-				if (!pull || !pull.data) continue;
 				if (pull.name) {
 					client.commands.set(pull.name, pull);
 					table.addRow(file, '✅');
