@@ -6,7 +6,7 @@ module.exports = {
 	category: 'settings',
 	aliases: ['settings'],
 	description: 'Allow the owner to change the guild settings',
-	usage: '`(prefix)`settings [prefix, memberRoleID, welcomechannel]',
+	usage: '`(prefix)`settings [prefix, memberRoleID, welcomechannel, levelupchannel]',
 	run: async (client, message, args) => {
 		try {
 			// server owner permission
@@ -17,19 +17,20 @@ module.exports = {
 				const embed = new MessageEmbed();
 				embed
 					.setTitle(`**\`${message.guild.name}\`**'s Settings:`)
-					.setDescription('If you are seeing no fields below it is because there is nothing assinged for the property\n**Properties:** `prefix`, `memberRoleID`, `welcomechannel`')
+					.setDescription('If you are seeing no fields below it is because there is nothing assinged for the property\n**Properties:** `prefix`, `memberRoleID`, `welcomechannel`, `levelupchannel`')
 					.setColor('RANDOM');
 				if (guildProfile.prefix) embed.addFields({ name: 'Prefix', value: guildProfile.prefix });
 				if (guildProfile.memberRoleID) embed.addFields({ name: 'Member Role ID', value: guildProfile.memberRoleID });
 				if (guildProfile.welcomeChannel) embed.addFields({ name: 'Welcome Channel', value: `<#${guildProfile.welcomeChannel}>` });
+				if (guildProfile.levelupChannel) embed.addFields({ name: 'Welcome Channel', value: `<#${guildProfile.levelupChannel}>` });
 				message.channel.send({ embeds : [embed] });
 
 			}
 			else {
-				if (!['prefix', 'memberRoleID', 'welcomechannel'].includes(args[0])) {return message.channel.send('You need a valid property to update.');}
+				if (!['prefix', 'memberRoleID', 'welcomechannel', 'levelupchannel'].includes(args[0])) {return message.channel.send('You need a valid property to update.');}
 				if (!args[1]) return message.channel.send('You did not state a value to update the property to.');
 				const channel = message.mentions.channels.first();
-				if (!channel) return message.reply('Please specify a channel you would like to be your welcome channel!');
+				if (!channel) return message.reply('Please specify a channel!');
 				if (args[0] === 'prefix') {
 					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { prefix: args[1], lastEdited: Date.now() });
 					message.channel.send(`**Updated:** ${args[0]} to \`${args[1]}\``);
@@ -40,6 +41,10 @@ module.exports = {
 				}
 				else if (args[0] === 'welcomechannel') {
 					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { welcomeChannel: channel.id, lastEdited: Date.now() });
+					message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+				}
+				else if (args[0] === 'levelupchannel') {
+					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { levelupChannel: channel.id, lastEdited: Date.now() });
 					message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
 				}
 			}
