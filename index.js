@@ -10,11 +10,11 @@ const { port } = require('./config.json');
 const app = express();
 
 app.listen(port, () => {
-	console.log('Project is running!');
+	console.log(`App listening at http://localhost:${port}`);
 });
 
 app.get('/', async (req, res) => {
-	res.send('Started!');
+	res.sendFile('index.html', { root: '.' });
 });
 
 // import modules
