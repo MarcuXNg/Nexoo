@@ -81,6 +81,7 @@ client.on('messageCreate', async (message) => {
 			userID: message.author.id,
 		});
 		if (profile) return message.channel.send('You cannot use the command as you are banned from using the bot');
+		// run the command
 		command.run(client, message, args);
 	}
 });
