@@ -9,13 +9,13 @@ console.log('Welcome to SERVICE HANDLER /--/ Discord: Kyen#7941');
    * @param {Client} client
    */
 
-
 module.exports = (client) => {
 	try {
 		readdirSync('./commands/').forEach((dir) => {
 			const commands = readdirSync(`./commands/${dir}/`).filter((file) => file.endsWith('.js'));
 			for (const file of commands) {
 				const pull = require(`../commands/${dir}/${file}`);
+				if (!pull || !pull.data) continue;
 				if (pull.name) {
 					client.commands.set(pull.name, pull);
 					table.addRow(file, '✅');
