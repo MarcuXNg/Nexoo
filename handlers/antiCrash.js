@@ -59,6 +59,7 @@ module.exports = (client) => {
 		process.on('multipleResolves', (type, promise, reason) => {
 			console.log('Multiple Resolves Error');
 			console.log(type, promise, reason);
+			if (reason.toLocaleString() === 'Error: Cannot perform IP discovery - socket closed') return;
 			client.users.cache.get(report).send({
 				embeds: [
 					new MessageEmbed()
