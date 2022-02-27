@@ -13,7 +13,7 @@ app.enable('trust proxy');
 app.set('etag', false);
 
 app.listen(port, () => {
-	console.log(`App listening at http://localhost:${port}`);
+	console.log('App listening at https://nexoo.herokuapp.com/');
 });
 
 app.get('/', async (req, res) => {
