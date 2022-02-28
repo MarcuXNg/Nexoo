@@ -39,7 +39,7 @@ module.exports = (client) => {
 				body: slashCommands,
 			},
 		);
-		console.log('SlashCommand is ready');
+		console.log('SlashCommand (globally registered) is ready!');
 	}
 	catch (e) {
 		console.log(e);
