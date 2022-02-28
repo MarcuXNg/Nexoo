@@ -52,7 +52,7 @@ module.exports = {
 					const channel = message.mentions.channels.first();
 					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { welcomeChannel: channel.id, lastEdited: Date.now() });
-						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+						message.channel.send(`**Updated:** Welcome Channel to ${channel}`);
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
@@ -60,7 +60,7 @@ module.exports = {
 					const channel = message.mentions.channels.first();
 					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { levelupChannel: channel.id, lastEdited: Date.now() });
-						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+						message.channel.send(`**Updated:** Level up Channel to ${channel}`);
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
@@ -68,7 +68,7 @@ module.exports = {
 					const channel = message.mentions.channels.first();
 					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketChannel: channel.id, lastEdited: Date.now() });
-						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+						message.channel.send(`**Updated:** Ticket Channel to ${channel}`);
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
@@ -76,7 +76,7 @@ module.exports = {
 					const channel = message.mentions.channels.first();
 					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketCategory: channel.id, lastEdited: Date.now() });
-						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+						message.channel.send(`**Updated:** Ticket Category to ${channel}`);
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
@@ -84,7 +84,7 @@ module.exports = {
 					const channel = message.mentions.channels.first();
 					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { transcriptChannel: channel.id, lastEdited: Date.now() });
-						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+						message.channel.send(`**Updated:** Transcript Channel to ${channel}`);
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
