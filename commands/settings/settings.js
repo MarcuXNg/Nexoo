@@ -50,7 +50,7 @@ module.exports = {
 				}
 				else if (args[0] === 'welcomechannel') {
 					const channel = message.mentions.channels.first();
-					if (args [1] === channel) {
+					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { welcomeChannel: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
 					}
@@ -58,7 +58,7 @@ module.exports = {
 				}
 				else if (args[0] === 'levelupchannel') {
 					const channel = message.mentions.channels.first();
-					if (args [1] === channel) {
+					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { levelupChannel: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
 					}
@@ -66,7 +66,7 @@ module.exports = {
 				}
 				else if (args[0] === 'ticketchannel') {
 					const channel = message.mentions.channels.first();
-					if (args [1] === channel) {
+					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketChannel: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
 					}
@@ -74,7 +74,7 @@ module.exports = {
 				}
 				else if (args[0] === 'ticketcategory') {
 					const channel = message.mentions.channels.first();
-					if (args [1] === channel) {
+					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketCategory: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
 					}
@@ -82,7 +82,7 @@ module.exports = {
 				}
 				else if (args[0] === 'transcriptchannel') {
 					const channel = message.mentions.channels.first();
-					if (args [1] === channel) {
+					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { transcriptChannel: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
 					}
