@@ -73,6 +73,7 @@ module.exports = (client) => {
 				],
 			});
 		});
+		console.log('AntiCrash handler is ready!');
 	}
 	catch (error) {
 		console.log(error);
