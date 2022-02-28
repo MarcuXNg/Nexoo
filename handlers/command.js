@@ -27,7 +27,7 @@ module.exports = (client) => {
 			}
 		});
 		console.log(table.toString());
-		console.log('Commands Handler is ready');
+		console.log('Commands Handler is ready!');
 	}
 	catch (e) {
 		console.log(String(e.stack));
