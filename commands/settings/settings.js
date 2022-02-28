@@ -40,8 +40,6 @@ module.exports = {
 			else {
 				if (!['prefix', 'memberroleid', 'welcomechannel', 'levelupchannel', 'ticketchannel', 'ticketcategory', 'transcriptchannel'].includes(args[0])) {return message.channel.send('You need a valid property to update.');}
 				if (!args[1]) return message.channel.send('You did not state a value to update the property to.');
-				const channel = message.mentions.channels.first();
-				if (!channel) return message.reply('Please specify a channel!');
 				if (args[0] === 'prefix') {
 					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { prefix: args[1], lastEdited: Date.now() });
 					message.channel.send(`**Updated:** ${args[0]} to \`${args[1]}\``);
@@ -51,24 +49,44 @@ module.exports = {
 					message.channel.send(`**Updated:** ${args[0]} to \`${args[1]}\``);
 				}
 				else if (args[0] === 'welcomechannel') {
-					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { welcomeChannel: channel.id, lastEdited: Date.now() });
-					message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+					const channel = message.mentions.channels.first();
+					if (args [1] === channel) {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { welcomeChannel: channel.id, lastEdited: Date.now() });
+						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+					}
+					else {return message.reply('Please specify a channel!');}
 				}
 				else if (args[0] === 'levelupchannel') {
-					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { levelupChannel: channel.id, lastEdited: Date.now() });
-					message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+					const channel = message.mentions.channels.first();
+					if (args [1] === channel) {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { levelupChannel: channel.id, lastEdited: Date.now() });
+						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+					}
+					else {return message.reply('Please specify a channel!');}
 				}
 				else if (args[0] === 'ticketchannel') {
-					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketChannel: channel.id, lastEdited: Date.now() });
-					message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+					const channel = message.mentions.channels.first();
+					if (args [1] === channel) {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketChannel: channel.id, lastEdited: Date.now() });
+						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+					}
+					else {return message.reply('Please specify a channel!');}
 				}
 				else if (args[0] === 'ticketcategory') {
-					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketCategory: channel.id, lastEdited: Date.now() });
-					message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+					const channel = message.mentions.channels.first();
+					if (args [1] === channel) {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketCategory: channel.id, lastEdited: Date.now() });
+						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+					}
+					else {return message.reply('Please specify a channel!');}
 				}
 				else if (args[0] === 'transcriptchannel') {
-					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { transcriptChannel: channel.id, lastEdited: Date.now() });
-					message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+					const channel = message.mentions.channels.first();
+					if (args [1] === channel) {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { transcriptChannel: channel.id, lastEdited: Date.now() });
+						message.channel.send(`**Updated:** ${args[0]} to ${channel}`);
+					}
+					else {return message.reply('Please specify a channel!');}
 				}
 			}
 		}
