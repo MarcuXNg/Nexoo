@@ -33,6 +33,7 @@ function getAll(client, message) {
 		giveaway: '🎉',
 		settings: '⚙️',
 		discordjs: '🐟',
+		systems: '🔧',
 	};
 	// map the categories (chữ cái đầu categories viết hoa)
 	const cate = client.categories
