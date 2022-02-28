@@ -26,7 +26,7 @@ module.exports = (client) => {
 				}
 			}
 		});
-		console.log('Events Handler is ready');
+		console.log('Events Handler is ready!');
 	}
 	catch (e) {
 		console.log(e);
