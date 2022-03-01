@@ -21,7 +21,7 @@ module.exports = {
 						iconURL: client.user.displayAvatarURL({ dynamic: true }),
 					})
 					.setTitle(`Server: **${message.guild.name}**`)
-					.setDescription('If you are seeing no fields below it is because there is nothing assinged for the property\n**Properties:** `prefix`, `memberRoleID`, `welcomechannel`, `levelupchannel`, `ticketchannel`, `ticketcategory`, `transcriptchannel`')
+					.setDescription('If you are seeing no fields below it is because there is nothing assinged for the property\n**Properties:** `prefix`, `memberRoleID`, `welcomechannel`, `levelupchannel`, `ticketchannel`, `ticketcategory`, `transcriptchannel`, `jointocreate`')
 					.setColor('RANDOM')
 					.setFooter({
 						text: 'To mention category please use <#categoryId>',
@@ -34,11 +34,12 @@ module.exports = {
 				if (guildProfile.ticketChannel) embed.addFields({ name: 'Ticket Channel', value: `<#${guildProfile.ticketChannel}>`, inline: true });
 				if (guildProfile.ticketCategory) embed.addFields({ name: 'Ticket Category', value: `<#${guildProfile.ticketCategory}>`, inline: true });
 				if (guildProfile.transcriptChannel) embed.addFields({ name: 'Transcript Channel', value: `<#${guildProfile.transcriptChannel}>`, inline: true });
+				if (guildProfile.joinToCreate) embed.addFields({ name: 'Join-to-Create Channel', value: `<#${guildProfile.joinToCreate}>`, inline: true });
 				message.channel.send({ embeds : [embed] });
 
 			}
 			else {
-				if (!['prefix', 'memberroleid', 'welcomechannel', 'levelupchannel', 'ticketchannel', 'ticketcategory', 'transcriptchannel'].includes(args[0])) {return message.channel.send('You need a valid property to update.');}
+				if (!['prefix', 'memberroleid', 'welcomechannel', 'levelupchannel', 'ticketchannel', 'ticketcategory', 'transcriptchannel', 'jointocreate'].includes(args[0])) {return message.channel.send('You need a valid property to update.');}
 				if (!args[1]) return message.channel.send('You did not state a value to update the property to.');
 				if (args[0] === 'prefix') {
 					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { prefix: args[1], lastEdited: Date.now() });
@@ -85,6 +86,14 @@ module.exports = {
 					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { transcriptChannel: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** Transcript Channel to ${channel}`);
+					}
+					else {return message.reply('Please specify a channel!');}
+				}
+				else if (args[0] === 'jointocreate') {
+					const channel = message.mentions.channels.first();
+					if (args[1] === `${channel}`) {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { joinToCreate: channel.id, lastEdited: Date.now() });
+						message.channel.send(`**Updated:** Join-to-Create Channel to ${channel}`);
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
