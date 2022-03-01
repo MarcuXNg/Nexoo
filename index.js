@@ -13,7 +13,7 @@ app.enable('trust proxy');
 app.set('etag', false);
 
 app.listen(port, () => {
-	console.log('App listening at https://nexoo.herokuapp.com/');
+	console.log(`App listening at http://localhost:${port}`);
 });
 
 app.get('/', async (req, res) => {
@@ -109,6 +109,7 @@ client.categories = readdirSync('./commands/');
 client.slashCategories = readdirSync('./slashcommands/');
 client.cooldowns = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
+client.voiceGenerator = new Discord.Collection();
 client.maps = new Map();
 
 // reconlx giveaway
