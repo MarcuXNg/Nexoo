@@ -11,5 +11,6 @@ const guildSchema = new mongoose.Schema({
 	ticketChannel: { type: String },
 	ticketCategory: { type: String },
 	transcriptChannel: { type: String },
+	joinToCreate: { type: String },
 });
 module.exports = new mongoose.model('Guild', guildSchema, 'guilds');
