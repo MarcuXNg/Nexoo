@@ -1,4 +1,5 @@
 const client = require('../../index');
+const Guild = require('../../database/models/guildSchema');
 
 client.on('voiceStateUpdate', async (oldState, newState) => {
 	if (!newState.guild || newState.member.user.bot) return;
@@ -13,7 +14,9 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
 	const { member, guild } = newState;
 	const oldChannel = oldState.channel;
 	const newChannel = newState.channel;
-	const joinToCreate = '947913008544358410';
+	const guildProfile = await Guild.findOne({ guildID: member.guild.id });
+	if (!guildProfile.joinToCreate) return;
+	const joinToCreate = guildProfile.joinToCreate;
 
 	if (oldChannel !== newChannel && newChannel && newChannel.id === joinToCreate) {
 		const voiceChannel = await guild.channels.create(member.user.tag, {
