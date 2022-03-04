@@ -12,15 +12,37 @@ module.exports = {
 	run: async (client, message, args) => {
 		try {
 			if (!args.length) {
-				let guildProfile = await Guild.findOne({ guildID: message.guild.id });
-				if (!guildProfile.ticketChannel && !guildProfile.ticketCategory && !guildProfile.transcriptChannel) {
-					guildProfile = await new Guild({
-						guildID: message.guild.id,
-						ticketChannel: message.channel.id,
-						ticketCategory: message.channel.parentId,
-						transcriptChannel: message.channel.id,
+				const guildProfile = await Guild.findOne({ guildID: message.guild.id });
+				const settings = `\`${client.prefix}settings [ ticketchannel, transcriptchannel, ticketcategory ]\``;
+				if (!guildProfile.ticketChannel) {
+					return message.channel.send({
+						embeds: [
+							new MessageEmbed()
+								.setTitle('Invalid ticket channel')
+								.setDescription(`**Note**: ${settings}`)
+								.setTimestamp(),
+						],
 					});
-					await guildProfile.save();
+				}
+				if (!guildProfile.transcriptChannel) {
+					return message.channel.send({
+						embeds: [
+							new MessageEmbed()
+								.setTitle('Invalid transcript channel')
+								.setDescription(`**Note**: ${settings}`)
+								.setTimestamp(),
+						],
+					});
+				}
+				if (!guildProfile.ticketCategory) {
+					return message.channel.send({
+						embeds: [
+							new MessageEmbed()
+								.setTitle('Invalid ticket category')
+								.setDescription(`**Note**: ${settings}`)
+								.setTimestamp(),
+						],
+					});
 				}
 				const { guild } = message;
 				const Embed = new MessageEmbed()
