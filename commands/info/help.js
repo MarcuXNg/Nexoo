@@ -32,7 +32,7 @@ function getAll(client, message) {
 		nsfw : '🔞',
 		giveaway: '🎉',
 		settings: '⚙️',
-		discordjs: '🐟',
+		discordjs: '<:djs:947828474285002772>',
 		systems: '🔧',
 	};
 	// map the categories (chữ cái đầu categories viết hoa)
