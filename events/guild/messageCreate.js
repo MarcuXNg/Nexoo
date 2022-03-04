@@ -12,8 +12,6 @@ client.on('messageCreate', async (message) => {
 	if (message.author.bot) return;
 	// không cho người dùng sử dụng bot trong direct message
 	if (!message.guild) return;
-	// const prefix from client default prefix
-	const prefix = client.prefix;
 	// discord-xp
 	const randomXP = Math.floor(Math.random() * 29) + 1;
 	const hasLeveledUP = await Levels.appendXp(message.author.id, message.guild.id, randomXP);
@@ -31,10 +29,8 @@ client.on('messageCreate', async (message) => {
 	await guildProfile.save().catch(err => console.log(err));
 	client.prefix = guildProfile.prefix;
 	// balance
-	// eslint-disable-next-line no-inline-comments
-	const RandomAmountOfCoins = Math.floor(Math.random() * 10) + 5; // 5-15
-	// eslint-disable-next-line no-inline-comments
-	const messageGive = Math.floor(Math.random() * 10) + 1; // 1-10
+	const RandomAmountOfCoins = Math.floor(Math.random() * 10) + 5;
+	const messageGive = Math.floor(Math.random() * 10) + 1;
 	if (messageGive >= 2 && messageGive <= 5) {
 		const balanceProfile = await Balance.findOne({ userID: message.author.id, guildID: message.guild.id }) || await new Balance({ userID: message.author.id, guildID: message.guild.id, lastEdited: Date.now() });
 		await balanceProfile.save().catch(err => console.log(err));
@@ -58,8 +54,8 @@ client.on('messageCreate', async (message) => {
 		});
 	}
 	// nếu tin nhắn không bắt đầu với prefix thì chạy function
-	if (!message.content.startsWith(prefix)) return await chatbot(message);
-	const args = message.content.slice(prefix.length).trim().split(/ +/g);
+	if (!message.content.startsWith(client.prefix)) return await chatbot(message);
+	const args = message.content.slice(client.prefix.length).trim().split(/ +/g);
 	const cmd = args.shift().toLowerCase();
 	if (message.channel.partial) await message.channel.fetch();
 	if (message.partial) await message.fetch();
@@ -68,7 +64,7 @@ client.on('messageCreate', async (message) => {
 	if (!command) command = client.commands.get(client.aliases.get(cmd));
 	if (command) {
 		// music join channel to use command message create
-		if (command.category === 'music' && !message.member.voice.channel) {
+		if (command.inVoiceChannel == true && !message.member.voice.channel) {
 			return message.channel.send({
 				embeds: [
 					new Discord.MessageEmbed().setColor('RANDOM').setDescription('❌ | **You must be in a voice channel to use the bot!**')],
