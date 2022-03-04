@@ -7,6 +7,7 @@ module.exports = {
 	category: "music",
 	aliases: ["unsh"],
 	usage: `${config.prefix}unshuffle`,
+	inVoiceChannel: true,
 	description: "Un-Shuffles the queue", 
 	run: async (client, message, args) => {
 		try {
