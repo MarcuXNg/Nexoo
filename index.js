@@ -4,34 +4,38 @@ console.clear();
 // import env file (secret environments)
 require('dotenv').config();
 
-// OAuth2
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 53134;
-
-app.enable('trust proxy');
-app.set('etag', false);
-
-app.listen(port, () => {
-	console.log(`App listening at http://localhost:${port}`);
-});
-
-app.get('/', async (req, res) => {
-	res.sendFile('index.html', { root: '.' });
-});
-
 // import modules
-const { readdirSync } = require('fs');
 const Discord = require('discord.js');
 const config = require('./config.json');
 const mongoose = require('./database/mongoose');
+
+// const express = require('express');
+// const app = express();
+// const port = process.env.PORT || 53134;
+const { readdirSync } = require('fs');
+
+// distube modules
+const { SpotifyPlugin } = require('@distube/spotify');
+const { SoundCloudPlugin } = require('@distube/soundcloud');
+const { YtDlpPlugin } = require('@distube/yt-dlp');
+const { DisTube } = require('distube');
+
+// discord-xp module
+const Levels = require('discord-xp');
 
 const client = new Discord.Client({
 	// import all intents
 	intents: 32767,
 	// disable replied user
-	allowedMentions: { repliedUser: false },
-	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+	allowedMentions: {
+		parse: [],
+		repliedUser: false,
+	},
+	partials: [
+		'MESSAGE',
+		'CHANNEL',
+		'REACTION',
+	],
 	messageCacheMaxSize: 10,
 	messageCacheLifetime: 60,
 	fetchAllMembers: false,
@@ -39,12 +43,6 @@ const client = new Discord.Client({
 	restWsBridgetimeout: 100,
 	disableEveryone: true,
 });
-
-// distube modules
-const { SpotifyPlugin } = require('@distube/spotify');
-const { SoundCloudPlugin } = require('@distube/soundcloud');
-const { YtDlpPlugin } = require('@distube/yt-dlp');
-const { DisTube } = require('distube');
 
 client.distube = new DisTube(client, {
 	// the amount of songs to be search in search results
@@ -123,7 +121,6 @@ const giveaway = new GiveawayClient({
 client.GiveawayClient = giveaway;
 
 // Discord-xp
-const Levels = require('discord-xp');
 Levels.setURL(process.env.dbToken);
 
 // Loading files, with the client variable like Command Handler, Event Handler, ...
@@ -131,5 +128,7 @@ Levels.setURL(process.env.dbToken);
 	require(`./handlers/${handler}`)(client);
 });
 
+// mongoose import
 mongoose.init();
+// login client
 client.login(process.env.DISCORD_TOKEN);
