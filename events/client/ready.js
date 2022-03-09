@@ -4,6 +4,7 @@ module.exports = {
 	once: true,
 	run: async (client, message, args) => {
 		try {
+			require('../../website/index')(client);
 			const servers = await client.guilds.cache.size;
 			const membercount = await client.guilds.cache.map(c => c.memberCount).reduce((a, b) => a + b);
 			const statusArray = [
