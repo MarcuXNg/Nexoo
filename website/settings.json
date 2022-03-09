@@ -1,0 +1,9 @@
+{
+    "website": {
+        "support": "https://dsc.gg/kyensgang",
+        "domain": "https://nexoo.herokuapp.com/"
+    },
+    "config": {
+        "callback": "https://nexoo.herokuapp.com/callback"
+    }
+}

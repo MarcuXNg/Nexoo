@@ -1,0 +1,57 @@
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="icon" type="image/png" href="<%= bot.user.displayAvatarURL({size: 128}) %>"> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<title><%= bot.user.username %> - The Discord Bot</title>
+
+<nav class="navbar navbar-expand-lg justify-content-center navbar-dark">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/" style="text-decoration: none;color:white;">
+                <img src="<%= bot.user.displayAvatarURL({size: 4096}) %>" alt="Logo" 
+                class="d-inline-block align-top"
+                >
+            </a> 
+        </div>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li>
+                <a class="navbar-brand" href="/" style="text-decoration: none;color:white;font-size: 20px;margin-left: 0px;font-weight: 600;text-shadow: 5px 2px 4px grey;">
+                    <%= bot.user.username %>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav navbar-right">
+            <li class="nav-item">
+                <a href="https://dsc.gg/nexoo" target="_blank">
+                    Invite
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="https://dsc.gg/kyensgang" target="_blank">Support Server</a>
+            </li>
+            <!-- <li class="nav-item">
+                <a href="/dashboard">Dashboard</a>
+            </li> -->
+            <div>
+                <% if(user && user.id) { %>
+                    <div class="dropdown">
+                        <div class="sc-hamgn6-3 sc-hamgn6-8 qyII jfQEbw btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="sc-hamgn6-4 kQkPlZ">
+                                <div class="sc-1tkkrjl-0 dPntfd" style="background-image: url(https://cdn.discordapp.com/avatars/<%=user.id%>/<%=user.avatar%>.png);"></div>
+                                <span class="sc-hamgn6-5 cNUIqp"><%= user.username %></span>
+                            </div>
+                        </div>
+                        <ul class="dropdown-menu sc-hamgn6-1 iVqRnR" aria-labelledby="dropdownMenuButton1">
+                            <li class="drpdownitem"><a class="sc-hamgn6-2 etHhdm" href="/dashboard">Dashboard</a></li>
+                            <li class="drpdownitem"><a class="sc-hamgn6-2 kHBTKi" href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                <% }else { %>
+                    <button class="sc-1o1fwv2-0 dHQcZ btn btn-primary " 
+                    onclick="location.href='/login'" type="button">Login</button>
+                <% }%>
+                </div>
+        </ul>
+    </div>
+</nav>
