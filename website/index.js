@@ -174,7 +174,7 @@ module.exports = client => {
 
 
 	const http = require('http').createServer(app);
-	http.listen(config.port, () => {
+	http.listen(process.env.PORT, () => {
 		console.log('Website is online on the Port: https://nexoo.herokuapp.com/');
 	});
 };
