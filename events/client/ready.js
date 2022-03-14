@@ -20,7 +20,7 @@ module.exports = {
 				},
 				{
 					type: 'PLAYING',
-					content: `${client.prefix}help | ${servers} servers`,
+					content: `${config.prefix}help | ${servers} servers`,
 					status: 'idle',
 				},
 				{
