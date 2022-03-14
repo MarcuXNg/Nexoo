@@ -18,7 +18,7 @@ client.on('messageCreate', async message => {
 				iconURL: config.botmention,
 			})
 			.setColor('RANDOM')
-			.setDescription(`My prefix is **\`${config.prefix}\`**`)
+			.setDescription(`My default prefix is **\`${config.prefix}\`**`)
 			.setFooter({
 				text: `Type ${config.prefix}help to see the command`,
 				iconURL: message.author.avatarURL({ dynamic: true }),
