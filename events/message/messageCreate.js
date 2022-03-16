@@ -17,7 +17,8 @@ client.on('messageCreate', async (message) => {
 	await guildProfile.save().catch(err => console.log(err));
 	client.prefix = guildProfile.prefix;
 	// discord-xp
-	const randomXP = Math.floor(Math.random() * 29) + 1;
+	// const randomXP = Math.floor(Math.random() * 29) + 1;
+	const randomXP = guildProfile.xp;
 	const hasLeveledUP = await Levels.appendXp(message.author.id, message.guild.id, randomXP);
 	if (guildProfile.level == true) {
 		if (hasLeveledUP) {
