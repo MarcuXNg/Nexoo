@@ -7,7 +7,7 @@ module.exports = {
 	aliases: ['i'],
 	category: 'info',
 	description: 'Shows an embed info of the bot',
-	usage: `${config.prefix}botinfo`,
+	usage: '(prefix)botinfo',
 	run: (client, message) => {
 		try {
 			const embed = new MessageEmbed();
@@ -36,12 +36,12 @@ module.exports = {
 						inline: true,
 					},
 					{
-						name: 'License',
+						name: '<:license:953505140898418788> License',
 						value: '[MIT](https://en.wikipedia.org/wiki/MIT_License)',
 						inline: true,
 					},
 					{
-						name: 'Version',
+						name: '<:version:953505140592218153> Version',
 						value: '2.0.0',
 						inline: true,
 					},
@@ -51,22 +51,22 @@ module.exports = {
 						inline: true,
 					},
 					{
-						name: 'Github',
+						name: '<:github:953505140311199815> Github',
 						value: `[MarcuXNg](${config.github})`,
 						inline: true,
 					},
 					{
-						name: 'Instagram',
+						name: '<:instagram:953490031908106240> Instagram',
 						value: `[Follow me](${config.instagram})`,
 						inline: true,
 					},
 					{
-						name: '🔗 Node.js version',
+						name: '<:nodejs:953505320729198632> Node.js version',
 						value: process.version,
 						inline: true,
 					},
 					{
-						name: '🔗 Discord.js Version',
+						name: '<:djs:947828474285002772> Discord.js Version',
 						value: version,
 						inline: true,
 					},
