@@ -3,7 +3,7 @@ module.exports = {
 	aliases: ['calc'],
 	category: 'fun',
 	description: 'calculate math',
-	usage: '(config)calculate',
+	usage: '(prefix)calculate',
 	run: async (client, message, args) => {
 		try {
 			const firstValue = Number(args[0]);
