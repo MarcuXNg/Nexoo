@@ -12,22 +12,23 @@ client.on('messageCreate', async (message) => {
 	if (message.author.bot) return;
 	// không cho người dùng sử dụng bot trong direct message
 	if (!message.guild) return;
-	// discord-xp
-	const randomXP = Math.floor(Math.random() * 29) + 1;
-	const hasLeveledUP = await Levels.appendXp(message.author.id, message.guild.id, randomXP);
-	if (hasLeveledUP) {
-		const user = await Levels.fetch(message.author.id, message.guild.id);
-		const guildProfile = await Guild.findOne({ guildID: message.guild.id });
-		if (guildProfile.levelupChannel) {
-			const channel = message.guild.channels.cache.get(guildProfile.levelupChannel);
-			channel.send(`GG ${message.member}, you just advanced to level ${user.level}!🎉. Continue your work within the server.`);
-		}
-		else {return;}
-	}
 	// settings
 	const guildProfile = await Guild.findOne({ guildID: message.guild.id }) || await new Guild({ guildID: message.guild.id });
 	await guildProfile.save().catch(err => console.log(err));
 	client.prefix = guildProfile.prefix;
+	// discord-xp
+	const randomXP = Math.floor(Math.random() * 29) + 1;
+	const hasLeveledUP = await Levels.appendXp(message.author.id, message.guild.id, randomXP);
+	if (guildProfile.level == true) {
+		if (hasLeveledUP) {
+			const user = await Levels.fetch(message.author.id, message.guild.id);
+			if (guildProfile.levelupChannel) {
+				const channel = message.guild.channels.cache.get(guildProfile.levelupChannel);
+				channel.send(`GG ${message.member}, you just advanced to level ${user.level}!🎉. Continue your work within the server.`);
+			}
+			else {return;}
+		}
+	}
 	// balance
 	const RandomAmountOfCoins = Math.floor(Math.random() * 10) + 5;
 	const messageGive = Math.floor(Math.random() * 10) + 1;
