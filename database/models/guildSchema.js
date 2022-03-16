@@ -14,5 +14,7 @@ const guildSchema = new mongoose.Schema({
 	joinToCreate: { type: String },
 	logChannel: { type: String },
 	leaveChannel: { type: String },
+	level: { type: Boolean, default: true },
+	log: { type: Boolean, default: false },
 });
 module.exports = new mongoose.model('Guild', guildSchema, 'guilds');
