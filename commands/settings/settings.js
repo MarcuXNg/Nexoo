@@ -51,6 +51,7 @@ module.exports = {
 
 				const levelembed = guildProfile.levelupChannel && guildProfile.level;
 				const logembed = guildProfile.logChannel && guildProfile.log;
+				const welcomeembed = guildProfile.welcomeChannel && guildProfile.welcome;
 
 				if (levelembed) {
 					embed.addFields(
@@ -66,6 +67,15 @@ module.exports = {
 						{
 							name: 'Log',
 							value: `**╰** ${options[guildProfile.log]}`,
+							inline: true,
+						},
+					);
+				}
+				if (welcomeembed) {
+					embed.addFields(
+						{
+							name: 'Welcome',
+							value: `**╰** ${options[guildProfile.welcome]}`,
 							inline: true,
 						},
 					);
@@ -108,6 +118,14 @@ module.exports = {
 					else if (args[1] == 'remove') {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { welcomeChannel: null, lastEdited: Date.now() });
 						message.reply('**Updated:** Remove Welcome Channel ');
+					}
+					else if (args[1] == 'on') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { level: true, lastEdited: Date.now() });
+						message.reply('**Updated:** Welcome `on` ');
+					}
+					else if (args[1] == 'off') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { level: false, lastEdited: Date.now() });
+						message.reply('**Updated:** Welcome `off` ');
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
