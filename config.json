@@ -1,14 +1,14 @@
 {
     "prefix": ">",
-    "iconURL":"https://raw.githubusercontent.com/MarcuXNg/Mus1que/main/assets/logo.gif?token=GHSAT0AAAAAABQGIEUILRQYBG36BAMCUTASYP6FUHQ",
-    "guildCreate": "https://raw.githubusercontent.com/MarcuXNg/Nexoo/main/assets/guildCreate.png?token=GHSAT0AAAAAABQGIEUJYQS5EV3A3MYS4BIKYQPEC4Q",
+    "iconURL":"https://i.imgur.com/GgNth0V.gifv",
+    "guildCreate": "https://i.imgur.com/WbB16hT.png",
     "invite": "https://dsc.gg/nexoo",
     "botinfo": "https://dankmemer.lol/gif/pepe-dancing.gif",
     "serversupport": "https://dsc.gg/kyensgang",
     "github": "https://github.com/MarcuXNg",
     "instagram": "https://www.instagram.com/trggkyeen._/",
-    "botmention": "https://raw.githubusercontent.com/MarcuXNg/Nexoo/main/assets/botmention.png?token=GHSAT0AAAAAABQGIEUIVQW4TTMLB3CHPHCIYQPIC3Q",
-    "goodbye": "https://raw.githubusercontent.com/MarcuXNg/Nexoo/main/assets/goodbye.png?token=GHSAT0AAAAAABQGIEUI5LI5PYT23YMMNUW4YRMOKBQ",
+    "botmention": "https://i.imgur.com/g6Q6Vrp.png",
+    "goodbye": "https://i.imgur.com/0vR0q5r.png",
     "antiCrash": "true",
     "port": 53134
 }
