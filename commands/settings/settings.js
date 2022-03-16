@@ -21,7 +21,7 @@ module.exports = {
 						iconURL: client.user.displayAvatarURL({ dynamic: true }),
 					})
 					.setTitle(`Server: **${message.guild.name}**`)
-					.setDescription('If you are seeing no fields below it is because there is nothing assinged for the property\n**Properties:** `prefix`, `memberRoleID`, `welcomechannel`, `levelupchannel`, `ticketchannel`, `ticketcategory`, `transcriptchannel`, `jointocreate`')
+					.setDescription('If you are seeing no fields below it is because there is nothing assinged for the property\n**Properties:** `prefix`, `memberRoleID`, `welcomechannel`, `levelupchannel`, `ticketchannel`, `ticketcategory`, `transcriptchannel`, `jointocreate`, `logchannel`, `leavechannel`')
 					.setColor('RANDOM')
 					.setFooter({
 						text: 'To mention category please use <#categoryId>',
@@ -35,11 +35,13 @@ module.exports = {
 				if (guildProfile.ticketCategory) embed.addFields({ name: 'Ticket Category', value: `<#${guildProfile.ticketCategory}>`, inline: true });
 				if (guildProfile.transcriptChannel) embed.addFields({ name: 'Transcript Channel', value: `<#${guildProfile.transcriptChannel}>`, inline: true });
 				if (guildProfile.joinToCreate) embed.addFields({ name: 'Join-to-Create Channel', value: `<#${guildProfile.joinToCreate}>`, inline: true });
+				if (guildProfile.logChannel) embed.addFields({ name: 'Log Channel', value: `<#${guildProfile.logChannel}>`, inline: true });
+				if (guildProfile.leaveChannel) embed.addFields({ name: 'Leave Channel', value: `<#${guildProfile.leaveChannel}>`, inline: true });
 				message.channel.send({ embeds : [embed] });
 
 			}
 			else {
-				if (!['prefix', 'memberroleid', 'welcomechannel', 'levelupchannel', 'ticketchannel', 'ticketcategory', 'transcriptchannel', 'jointocreate'].includes(args[0])) {return message.channel.send('You need a valid property to update.');}
+				if (!['prefix', 'memberroleid', 'welcomechannel', 'levelupchannel', 'ticketchannel', 'ticketcategory', 'transcriptchannel', 'jointocreate', 'logchannel', 'leavechannel' ].includes(args[0])) {return message.channel.send('You need a valid property to update.');}
 				if (!args[1]) return message.channel.send('You did not state a value to update the property to.');
 				if (args[0] === 'prefix') {
 					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { prefix: args[1], lastEdited: Date.now() });
@@ -55,6 +57,10 @@ module.exports = {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { welcomeChannel: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** Welcome Channel to ${channel}`);
 					}
+					else if (args[1] == 'remove') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { welcomeChannel: null, lastEdited: Date.now() });
+						message.reply('**Updated:** Remove Welcome Channel ');
+					}
 					else {return message.reply('Please specify a channel!');}
 				}
 				else if (args[0] === 'levelupchannel') {
@@ -62,6 +68,10 @@ module.exports = {
 					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { levelupChannel: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** Level up Channel to ${channel}`);
+					}
+					else if (args[1] == 'remove') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { levelupChannel: null, lastEdited: Date.now() });
+						message.reply('**Updated:** Remove Level up Channel ');
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
@@ -71,6 +81,10 @@ module.exports = {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketChannel: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** Ticket Channel to ${channel}`);
 					}
+					else if (args[1] == 'remove') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketChannel: null, lastEdited: Date.now() });
+						message.reply('**Updated:** Remove Ticket Channel ');
+					}
 					else {return message.reply('Please specify a channel!');}
 				}
 				else if (args[0] === 'ticketcategory') {
@@ -78,6 +92,10 @@ module.exports = {
 					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketCategory: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** Ticket Category to ${channel}`);
+					}
+					else if (args[1] == 'remove') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { ticketCategory: null, lastEdited: Date.now() });
+						message.reply('**Updated:** Remove Ticket Category ');
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
@@ -87,6 +105,10 @@ module.exports = {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { transcriptChannel: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** Transcript Channel to ${channel}`);
 					}
+					else if (args[1] == 'remove') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { transcriptChannel: null, lastEdited: Date.now() });
+						message.reply('**Updated:** Remove Transcript Channel ');
+					}
 					else {return message.reply('Please specify a channel!');}
 				}
 				else if (args[0] === 'jointocreate') {
@@ -94,6 +116,34 @@ module.exports = {
 					if (args[1] === `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { joinToCreate: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** Join-to-Create Channel to ${channel}`);
+					}
+					else if (args[1] == 'remove') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { joinToCreate: null, lastEdited: Date.now() });
+						message.reply('**Updated:** Remove Join-to-create Channel ');
+					}
+					else {return message.reply('Please specify a channel!');}
+				}
+				else if (args[0] === 'logchannel') {
+					const channel = message.mentions.channels.first();
+					if (args[1] === `${channel}`) {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { logChannel: channel.id, lastEdited: Date.now() });
+						message.channel.send(`**Updated:** Log Channel to ${channel}`);
+					}
+					else if (args[1] == 'remove') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { logChannel: null, lastEdited: Date.now() });
+						message.reply('**Updated:** Remove Log Channel ');
+					}
+					else {return message.reply('Please specify a channel!');}
+				}
+				else if (args[0] === 'leavechannel') {
+					const channel = message.mentions.channels.first();
+					if (args[1] === `${channel}`) {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { leaveChannel: channel.id, lastEdited: Date.now() });
+						message.channel.send(`**Updated:** Log Channel to ${channel}`);
+					}
+					else if (args[1] == 'remove') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { leaveChannel: null, lastEdited: Date.now() });
+						message.reply('**Updated:** Remove Leave Channel ');
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
