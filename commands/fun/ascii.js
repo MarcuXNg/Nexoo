@@ -8,7 +8,7 @@ module.exports = {
 	category: 'fun',
 	aliases: ['ascii'],
 	description: 'Show a random meme',
-	usage: `${config.prefix}ascii <text> <font>`,
+	usage: '(prefix)ascii `<text>` `<font>`',
 	run : async (client, message, args) => {
 		try {
 			const text = args[0];
