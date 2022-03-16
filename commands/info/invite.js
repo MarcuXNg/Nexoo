@@ -7,15 +7,15 @@ module.exports = {
 	aliases: ['invite'],
 	category: 'info',
 	description: 'Gets the invite link of the bot',
-	usage: `${config.prefix}invite`,
+	usage: '(prefix)invite',
 	run: (client, message) => {
 		try {
-			message.channel.send({ embeds : [
+			message.reply({ embeds : [
 				new MessageEmbed()
 					.setColor(ee.color)
-					.setTitle('💌 Thanks for Inviting me..')
-					.setDescription('>>> ** [Click here to Invite](https://dsc.gg/nexoo) **')
-					.setFooter({ text : ee.footertext }),
+					.setTitle('💌 An Invite has been Requested')
+					.setDescription('>>> ** [Invite Nexoo Here](https://dsc.gg/nexoo) **')
+					.setFooter({ text : ee.footerinvite }),
 			] });
 		}
 		catch (err) {
