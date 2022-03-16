@@ -17,6 +17,7 @@ module.exports = {
 				true: 'On',
 				false: 'Off',
 			};
+			const xpsettings = `\`${client.prefix}settings levelupchannel (xp / xprate)\``;
 			if (!args.length) {
 				const embed = new MessageEmbed();
 				embed
@@ -30,7 +31,7 @@ module.exports = {
 					.setFields(
 						{
 							name: '<:warning:953612891616051240> Notice',
-							value: `>>> <:diamond:953608874487857213> **Remove Channel:** \`${client.prefix}settings (properties) remove\`\n<:diamond:953608874487857213> **Turn properties (on/off):** \`${client.prefix}settings (properties) [on/off]\`\n<:diamond:953608874487857213> **Turn settings (on/off):** \`${client.prefix}settings logchannel (settings) [on/off]\``,
+							value: `>>> <:diamond:953608874487857213> **Remove Channel:** \`${client.prefix}settings (properties) remove\`\n<:diamond:953608874487857213> **Turn properties (on/off):** \`${client.prefix}settings (properties) [on/off]\`\n<:diamond:953608874487857213> **Turn settings (on/off):** \`${client.prefix}settings logchannel (settings) [on/off]\`\n<:diamond:953608874487857213> **Change settings:** ${xpsettings}`,
 							inline: false,
 						},
 					)
@@ -72,6 +73,15 @@ module.exports = {
 						{
 							name: 'Level',
 							value: `**╰** \`${options[guildProfile.level]}\``,
+							inline: true,
+						},
+					);
+				}
+				if (guildProfile.xp) {
+					embed.addFields(
+						{
+							name: 'Xp',
+							value: `**╰** \`${guildProfile.xp}\``,
 							inline: true,
 						},
 					);
@@ -269,20 +279,39 @@ module.exports = {
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
+				// level up channel
 				else if (args[0] === 'levelupchannel') {
 					const channel = message.mentions.channels.first();
-					if (args[1] === `${channel}`) {
+					// choose the channel to send level up message
+					if (args[1] == `${channel}`) {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { levelupChannel: channel.id, lastEdited: Date.now() });
 						message.channel.send(`**Updated:** Level up Channel to ${channel}`);
 					}
+					// change the xp
+					if (args[1] == 'xp') {
+						if (isNaN(args[2])) return message.channel.send('Please choose a `number`');
+						if (args[2] <= 0) return message.channel.send('Please choose `integer >= 1`');
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { xp: args[2], lastEdited: Date.now() });
+						await message.channel.send(`**Updated:** Set xp to \`${parseInt(args[2])}\``);
+					}
+					if (args[1] == 'xprate') {
+						if (!['x3', 'x1'].includes(args[2])) return message.reply(`**Usage:** ${xpsettings}`);
+						if (args[2] == 'x3') {
+							await Guild.findOneAndUpdate({ guildID: message.guild.id }, { xp: 300, lastEdited: Date.now() });
+							await message.channel.send(`**Updated:** Set xp to \`${args[2]}\``);
+						}
+					}
+					// remove the level up channel
 					else if (args[1] == 'remove') {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { levelupChannel: null, lastEdited: Date.now() });
 						message.reply('**Updated:** Remove Level up Channel ');
 					}
+					// turn level on
 					else if (args[1] == 'on') {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { level: true, lastEdited: Date.now() });
 						message.reply('**Updated:** Level `on` ');
 					}
+					// turn level off
 					else if (args[1] == 'off') {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { level: false, lastEdited: Date.now() });
 						message.reply('**Updated:** Level `off` ');
