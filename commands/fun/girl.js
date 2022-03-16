@@ -6,7 +6,7 @@ module.exports = {
 	aliases: ['girl'],
 	category: 'fun',
 	description: 'random girls pic',
-	usage: '(config)girl',
+	usage: '(prefix)girl',
 	run: async (client, message) => {
 		try {
 			fetch(
