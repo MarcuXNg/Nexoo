@@ -13,35 +13,83 @@ module.exports = {
 			if (message.author.id !== message.guild.ownerId) return message.channel.send('You do not have permission to use this command because you are not the server owner.');
 			// settings
 			const guildProfile = await Guild.findOne({ guildID: message.guild.id });
+			const options = {
+				true: 'On',
+				false: 'Off',
+			};
 			if (!args.length) {
 				const embed = new MessageEmbed();
 				embed
 					.setAuthor({
-						name: 'Settings',
-						iconURL: client.user.displayAvatarURL({ dynamic: true }),
+						name: message.guild.name,
+						iconURL: message.guild.iconURL({ dynamic: true }) || 'https://cdn.discordapp.com/attachments/765919453766352916/877787616974622770/wCfHtuoejLIbAAAAABJRU5ErkJggg.png',
 					})
-					.setTitle(`Server: **${message.guild.name}**`)
-					.setDescription('If you are seeing no fields below it is because there is nothing assinged for the property\n**Properties:** `prefix`, `memberRoleID`, `welcomechannel`, `levelupchannel`, `ticketchannel`, `ticketcategory`, `transcriptchannel`, `jointocreate`, `logchannel`, `leavechannel`')
-					.setColor('RANDOM')
+					.setTitle('⚙️ Settings')
+					.setDescription('If you are seeing no fields below it is because there is nothing assinged for the property\n\n**Properties:** `prefix`, `memberRoleID`, `welcomechannel`, `levelupchannel`, `ticketchannel`, `ticketcategory`, `transcriptchannel`, `jointocreate`, `logchannel`, `leavechannel`')
+					.setColor('#C88484')
+					.setFields(
+						{
+							name: '<:warning:953612891616051240> Notice',
+							value: `>>> <:diamond:953608874487857213> **Remove Channel:** \`${client.prefix}settings (properties) remove\`\n<:diamond:953608874487857213> **Turn settings (on/off):** \`${client.prefix}settings (properties) [on/off]\``,
+							inline: false,
+						},
+					)
 					.setFooter({
-						text: 'To mention category please use <#categoryId>',
+						text: 'Contact MarcuX#7941 for more information',
 						iconURL: message.author.displayAvatarURL({ dynamic: true }),
 					});
-				if (guildProfile.prefix) embed.addFields({ name: 'Prefix', value: guildProfile.prefix, inline: true });
+				if (guildProfile.prefix) embed.addFields({ name: '<:prefix:953605494264696902> Prefix', value: `**╰** ${guildProfile.prefix}`, inline: true });
 				if (guildProfile.memberRoleID) embed.addFields({ name: 'Member Role ID', value: guildProfile.memberRoleID, inline: true });
-				if (guildProfile.welcomeChannel) embed.addFields({ name: 'Welcome Channel', value: `<#${guildProfile.welcomeChannel}>`, inline: true });
-				if (guildProfile.levelupChannel) embed.addFields({ name: 'Level up Channel', value: `<#${guildProfile.levelupChannel}>`, inline: true });
-				if (guildProfile.ticketChannel) embed.addFields({ name: 'Ticket Channel', value: `<#${guildProfile.ticketChannel}>`, inline: true });
-				if (guildProfile.ticketCategory) embed.addFields({ name: 'Ticket Category', value: `<#${guildProfile.ticketCategory}>`, inline: true });
-				if (guildProfile.transcriptChannel) embed.addFields({ name: 'Transcript Channel', value: `<#${guildProfile.transcriptChannel}>`, inline: true });
-				if (guildProfile.joinToCreate) embed.addFields({ name: 'Join-to-Create Channel', value: `<#${guildProfile.joinToCreate}>`, inline: true });
-				if (guildProfile.logChannel) embed.addFields({ name: 'Log Channel', value: `<#${guildProfile.logChannel}>`, inline: true });
-				if (guildProfile.leaveChannel) embed.addFields({ name: 'Leave Channel', value: `<#${guildProfile.leaveChannel}>`, inline: true });
+				if (guildProfile.welcomeChannel) embed.addFields({ name: 'Welcome Channel', value: `**╰** <#${guildProfile.welcomeChannel}>`, inline: true });
+				if (guildProfile.levelupChannel) embed.addFields({ name: 'Level up Channel', value: `**╰** <#${guildProfile.levelupChannel}>`, inline: true });
+				if (guildProfile.ticketChannel) embed.addFields({ name: 'Ticket Channel', value: `**╰** <#${guildProfile.ticketChannel}>`, inline: true });
+				if (guildProfile.ticketCategory) embed.addFields({ name: 'Ticket Category', value: `**╰** <#${guildProfile.ticketCategory}>`, inline: true });
+				if (guildProfile.transcriptChannel) embed.addFields({ name: 'Transcript Channel', value: `**╰** <#${guildProfile.transcriptChannel}>`, inline: true });
+				if (guildProfile.joinToCreate) embed.addFields({ name: 'Join-to-Create Channel', value: `**╰** <#${guildProfile.joinToCreate}>`, inline: true });
+				if (guildProfile.logChannel) embed.addFields({ name: 'Log Channel', value: `**╰** <#${guildProfile.logChannel}>`, inline: true });
+				if (guildProfile.leaveChannel) embed.addFields({ name: 'Leave Channel', value: `**╰** <#${guildProfile.leaveChannel}>`, inline: true });
+
+				const levelembed = guildProfile.levelupChannel && guildProfile.level;
+				const logembed = guildProfile.logChannel && guildProfile.log;
+
+				if (levelembed) {
+					embed.addFields(
+						{
+							name: 'Level',
+							value: `**╰** ${options[guildProfile.level]}`,
+							inline: true,
+						},
+					);
+				}
+				if (logembed) {
+					embed.addFields(
+						{
+							name: 'Log',
+							value: `**╰** ${options[guildProfile.log]}`,
+							inline: true,
+						},
+					);
+				}
+				embed.addFields({
+					name: '<:tips:953610039795523624> Tips',
+					value: '- To mention category please use <#categoryId>',
+					inline: false,
+				}),
 				message.channel.send({ embeds : [embed] });
 
 			}
 			else {
-				if (!['prefix', 'memberroleid', 'welcomechannel', 'levelupchannel', 'ticketchannel', 'ticketcategory', 'transcriptchannel', 'jointocreate', 'logchannel', 'leavechannel' ].includes(args[0])) {return message.channel.send('You need a valid property to update.');}
+				if (!['prefix',
+					'memberroleid',
+					'welcomechannel',
+					'levelupchannel',
+					'ticketchannel',
+					'ticketcategory',
+					'transcriptchannel',
+					'jointocreate',
+					'logchannel',
+					'leavechannel']
+					.includes(args[0])) {return message.channel.send('You need a valid property to update.');}
 				if (!args[1]) return message.channel.send('You did not state a value to update the property to.');
 				if (args[0] === 'prefix') {
 					await Guild.findOneAndUpdate({ guildID: message.guild.id }, { prefix: args[1], lastEdited: Date.now() });
@@ -72,6 +120,14 @@ module.exports = {
 					else if (args[1] == 'remove') {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { levelupChannel: null, lastEdited: Date.now() });
 						message.reply('**Updated:** Remove Level up Channel ');
+					}
+					else if (args[1] == 'on') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { level: true, lastEdited: Date.now() });
+						message.reply('**Updated:** Level `on` ');
+					}
+					else if (args[1] == 'off') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { level: false, lastEdited: Date.now() });
+						message.reply('**Updated:** Level `off` ');
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
@@ -132,6 +188,14 @@ module.exports = {
 					else if (args[1] == 'remove') {
 						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { logChannel: null, lastEdited: Date.now() });
 						message.reply('**Updated:** Remove Log Channel ');
+					}
+					else if (args[1] == 'on') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { log: true, lastEdited: Date.now() });
+						message.reply('**Updated:** Log `on` ');
+					}
+					else if (args[1] == 'off') {
+						await Guild.findOneAndUpdate({ guildID: message.guild.id }, { log: false, lastEdited: Date.now() });
+						message.reply('**Updated:** Log `off` ');
 					}
 					else {return message.reply('Please specify a channel!');}
 				}
