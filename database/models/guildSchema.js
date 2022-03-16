@@ -31,5 +31,6 @@ const guildSchema = new mongoose.Schema({
 	banadd: { type: Boolean, default: false },
 	rDelete: { type: Boolean, default: false },
 	rUpdate: { type: Boolean, default: false },
+	xp: { type: String, default: 50 },
 });
 module.exports = new mongoose.model('Guild', guildSchema, 'guilds');
