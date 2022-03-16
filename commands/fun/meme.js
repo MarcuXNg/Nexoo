@@ -1,12 +1,11 @@
 const got = require('got');
-const config = require('../../config.json');
 const { MessageEmbed } = require('discord.js');
 module.exports = {
 	name: 'meme',
 	category: 'fun',
 	aliases: ['meme'],
 	description: 'Show a random meme',
-	usage: `${config.prefix}meme`,
+	usage: '(prefix)meme',
 	run : async (client, message) => {
 		got('https://www.reddit.com/r/memes/random/.json').then(res => {
 			const content = JSON.parse(res.body);
