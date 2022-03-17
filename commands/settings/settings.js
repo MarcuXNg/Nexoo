@@ -27,7 +27,7 @@ module.exports = {
 					})
 					.setTitle('⚙️ Settings')
 					.setDescription('If you are seeing no fields below it is because there is nothing assinged for the property\n\n**Properties:** `prefix`, `memberRoleID`, `welcomechannel`, `levelupchannel`, `ticketchannel`, `ticketcategory`, `transcriptchannel`, `jointocreate`, `logchannel`, `leavechannel`\n**Settings:** `memberup`, `memberban`, `memberunban`, `channelcreate`, `channeldelete`, `channelpins`, `channelupdate`, `emojicreate`, `emojidelete`, `emojiupdate`,`rolecreate`, `roledelete`, `roleupdate`')
-					.setColor('#C88484')
+					.setColor('#C70039')
 					.setFields(
 						{
 							name: '<:warning:953612891616051240> Notice',
@@ -49,6 +49,7 @@ module.exports = {
 				if (guildProfile.joinToCreate) embed.addFields({ name: 'Join-to-Create Channel', value: `**╰** <#${guildProfile.joinToCreate}>`, inline: true });
 				if (guildProfile.logChannel) embed.addFields({ name: 'Log Channel', value: `**╰** <#${guildProfile.logChannel}>`, inline: true });
 				if (guildProfile.leaveChannel) embed.addFields({ name: 'Leave Channel', value: `**╰** <#${guildProfile.leaveChannel}>`, inline: true });
+				if (guildProfile.chatbotChannel) embed.addFields({ name: 'Chatbot Channel', value: `**╰** <#${guildProfile.chatbotChannel}>`, inline: true });
 
 				const levelembed = guildProfile.levelupChannel;
 				const logembed = guildProfile.logChannel;
@@ -67,6 +68,7 @@ module.exports = {
 				const rCreateEmbed = guildProfile.logChannel;
 				const rDeleteEmbed = guildProfile.logChannel;
 				const rUpdateEmbed = guildProfile.logChannel;
+				const chatbotEmbed = guildProfile.chatbotChannel;
 
 				if (levelembed) {
 					embed.addFields(
@@ -82,6 +84,24 @@ module.exports = {
 						{
 							name: 'Xp',
 							value: `**╰** \`${guildProfile.xp}\``,
+							inline: true,
+						},
+					);
+				}
+				if (guildProfile.chatbotlang) {
+					embed.addFields(
+						{
+							name: 'ChatBot Language',
+							value: `**╰** \`${guildProfile.chatbotlang}\``,
+							inline: true,
+						},
+					);
+				}
+				if (chatbotEmbed) {
+					embed.addFields(
+						{
+							name: 'Chat Bot',
+							value: `**╰** \`${options[guildProfile.chatbot]}\``,
 							inline: true,
 						},
 					);
