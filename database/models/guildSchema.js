@@ -32,5 +32,8 @@ const guildSchema = new mongoose.Schema({
 	rDelete: { type: Boolean, default: false },
 	rUpdate: { type: Boolean, default: false },
 	xp: { type: String, default: 50 },
+	chatbot: { type: Boolean, default: false },
+	chatbotChannel: { type: String },
+	chatbotlang: { type: String, default: 'vn' },
 });
 module.exports = new mongoose.model('Guild', guildSchema, 'guilds');
