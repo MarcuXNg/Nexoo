@@ -12,7 +12,7 @@ client.distube
 			{
 				embeds: [
 					new Discord.MessageEmbed()
-						.setColor('RANDOM')
+						.setColor('#3C85D1')
 						.setThumbnail(song.thumbnail)
 						.setAuthor({
 							name: 'Now playing',
