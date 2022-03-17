@@ -85,10 +85,24 @@ client.on('messageCreate', async (message) => {
 });
 
 async function chatbot(message) {
-	// không có tin nhắn thì ko chạy
-	if (!message.content || message.mentions.repliedUser?.id !== message.client.user.id) return;
-	message.channel.sendTyping();
-	const res = await axios.get(`https://api.simsimi.net/v2/?text=${encodeURIComponent(message.content)}&lc=vn`).catch(console.log);
-	if (!res) return false;
-	else return message.reply(`${res.data.success}`);
+	const guildProfile = await Guild.findOne({ guildID: message.guild.id });
+	if (guildProfile.chatbot == true) {
+		if (guildProfile.chatbotChannel) {
+			const chan = await client.channels.fetch(guildProfile.chatbotChannel);
+			// không có tin nhắn thì ko chạy
+			if (!message.content || message.channel.id !== guildProfile.chatbotChannel) return;
+			chan.sendTyping();
+			const res = await axios.get(`https://api.simsimi.net/v2/?text=${encodeURIComponent(message.content)}&lc=${guildProfile.chatbotlang}`).catch(console.log);
+			if (!res) return false;
+			else return chan.send(`${res.data.success}`);
+		}
+		else if (!guildProfile.chatbotChannel) {
+			// không có tin nhắn thì ko chạy
+			if (!message.content || message.mentions.repliedUser?.id !== message.client.user.id) return;
+			message.channel.sendTyping();
+			const res = await axios.get(`https://api.simsimi.net/v2/?text=${encodeURIComponent(message.content)}&lc=${guildProfile.chatbotlang}`).catch(console.log);
+			if (!res) return false;
+			else return message.reply(`${res.data.success}`);
+		}
+	}
 }
