@@ -8,7 +8,7 @@ client.distube
 			{
 				embeds: [
 					new Discord.MessageEmbed()
-						.setColor('RANDOM')
+						.setColor('#3C85D1')
 						.setAuthor({
 							name: 'Song selection. Type the song number to continue',
 							iconURL: message.guild.iconURL({ dynamic: true }) || 'https://cdn.discordapp.com/attachments/765919453766352916/877787616974622770/wCfHtuoejLIbAAAAABJRU5ErkJggg.png',
