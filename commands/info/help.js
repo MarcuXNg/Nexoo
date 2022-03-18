@@ -28,6 +28,7 @@ function getAll(client, message) {
 		info : 'ℹ️',
 		level : '🧪',
 		moderation : '🔨',
+		games: '<:games:954406957408747590>',
 		music : '🎵',
 		nsfw : '🔞',
 		giveaway: '🎉',
