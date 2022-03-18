@@ -8,7 +8,7 @@ module.exports = {
 	name: 'tictactoe',
 	aliases: ['ttt'],
 	description: 'Tictactoe game',
-	category: 'tictactoe',
+	category: 'games',
 	usage: '(prefix)tictactoe',
 	run: async (client, message, args) => {
 		try {
