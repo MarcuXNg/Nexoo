@@ -108,6 +108,7 @@ client.slashCategories = readdirSync('./slashcommands/');
 client.cooldowns = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
 client.voiceGenerator = new Discord.Collection();
+client.timeouts = new Discord.Collection();
 client.maps = new Map();
 
 // reconlx giveaway
@@ -123,7 +124,7 @@ client.GiveawayClient = giveaway;
 // Discord-xp
 Levels.setURL(process.env.dbToken);
 
-// Loading files, with the client variable like Command Handler, Event Handler, ...
+// Loading files, with the client variable like Command Handler, Event Handler, SlashCommand Handler, AntiCrash Handler ...
 ['command', 'event', 'slashcommand', config.antiCrash ? 'antiCrash' : null].filter(Boolean).forEach(handler => {
 	require(`./handlers/${handler}`)(client);
 });
