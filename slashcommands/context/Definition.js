@@ -23,7 +23,7 @@ module.exports = {
 				value: `\`\`\` Definition : ${data.definitions[0].definition} \n Example : ${data.definitions[0].example} \`\`\``,
 			};
 		});
-		if (!result.meanings) {
+		if (result.meanings == null) {
 			return interaction.reply({
 				embeds: [new MessageEmbed()
 					.setColor('RED')
