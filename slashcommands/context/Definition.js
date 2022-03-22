@@ -22,9 +22,9 @@ module.exports = {
 				name: data.partOfSpeech.toUpperCase(),
 				value: `\`\`\` Definition : ${data.definitions[0].definition} \n Example : ${data.definitions[0].example} \`\`\``,
 			};
-		});
-		if (result.meanings == null) {
-			return interaction.reply({
+		}).catch((e) => {
+			console.log(e);
+			interaction.reply({
 				embeds: [new MessageEmbed()
 					.setColor('RED')
 					.setDescription(`**Note**: ${result.message}\n**Solution**: ${result.resolution}`)
@@ -32,7 +32,7 @@ module.exports = {
 					.addFields(fields),
 				],
 			});
-		}
+		});
 		interaction.reply({
 			embeds: [new MessageEmbed()
 				.setColor('RED')
