@@ -23,6 +23,16 @@ module.exports = {
 				value: `\`\`\` Definition : ${data.definitions[0].definition} \n Example : ${data.definitions[0].example} \`\`\``,
 			};
 		});
+		if (!result.meanings) {
+			return interaction.reply({
+				embeds: [new MessageEmbed()
+					.setColor('RED')
+					.setDescription(`**Note**: ${result.message}\n**Solution**: ${result.resolution}`)
+					.setTitle(result.title)
+					.addFields(fields),
+				],
+			});
+		}
 		interaction.reply({
 			embeds: [new MessageEmbed()
 				.setColor('RED')
