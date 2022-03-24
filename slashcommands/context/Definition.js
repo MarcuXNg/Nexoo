@@ -16,22 +16,13 @@ module.exports = {
 			interaction.reply(`\`${word}\` Not Found`);
 		});
 		const res = await datas.json();
+		console.log(res);
 		const result = res[0];
 		const fields = await result.meanings.map((data, index) => {
 			return {
 				name: data.partOfSpeech.toUpperCase(),
 				value: `\`\`\` Definition : ${data.definitions[0].definition} \n Example : ${data.definitions[0].example} \`\`\``,
 			};
-		}).catch((e) => {
-			console.log(e);
-			interaction.reply({
-				embeds: [new MessageEmbed()
-					.setColor('RED')
-					.setDescription(`**Note**: ${result.message}\n**Solution**: ${result.resolution}`)
-					.setTitle(result.title)
-					.addFields(fields),
-				],
-			});
 		});
 		interaction.reply({
 			embeds: [new MessageEmbed()
