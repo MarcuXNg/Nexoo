@@ -60,9 +60,9 @@ module.exports = {
 						}
 						return;
 					}
-					if (!message.guild.me.voice.channel) {
-						await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
-					}
+					// if (!message.guild.me.voice.channel) {
+					// 	await message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
+					// }
 					await client.distube.play(message.member.voice.channel, SearchString, {
 						member: message.member,
 						textChannel: message.channel,
