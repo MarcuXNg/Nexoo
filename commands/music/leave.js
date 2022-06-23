@@ -19,7 +19,7 @@ module.exports = {
 				adapterCreator: message.guild.voiceAdapterCreator,
 			});
 			connection.destroy();
-			await message.channel.send('❌ I\'m not in the voicechannel!');
+			await message.channel.send('I left the voice.');
 			await message.react('✅');
 		}
 		catch (err) {
