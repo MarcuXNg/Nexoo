@@ -21,10 +21,7 @@ module.exports = {
 				}
 			}
 			client.distube.voices.join(voiceChannel);
-			// await message.channel.send({
-			//     embeds: [
-			//         new Discord.MessageEmbed().setColor('RANDOM').setDescription(`✅ | Successfully connected to channel ** ${voiceChannel.name}**`)]
-			// });
+			await message.channel.send(`✅ Successfully connected to channel ${voiceChannel.name}`);
 			await message.react('✅');
 		}
 		catch (err) {
