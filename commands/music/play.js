@@ -7,7 +7,7 @@ module.exports = {
 	aliases: ['p'],
 	category: 'music',
 	description: 'playing music from youtube, soundcloud, spotify, zingmp3',
-	usage: `${config.prefix}play [song name/song url]`,
+	usage: '(prefix)play [song name/song url]',
 	inVoiceChannel: true,
 	run: async (client, message, args) => {
 		try {
