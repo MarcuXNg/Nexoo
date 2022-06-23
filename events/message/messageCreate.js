@@ -64,6 +64,9 @@ client.on('messageCreate', async (message) => {
 	if (cmd.length === 0) return;
 	let command = client.commands.get(cmd);
 	if (!command) command = client.commands.get(client.aliases.get(cmd));
+	// send a message when the bot join a voice channel
+	const voiceChannel = message.member.voice.channel;
+	if (!message.guild.me.voice.channel) return message.channel.send(`📣 Successfully connected to channel  **${voiceChannel.name}**`);
 	if (command) {
 		// in-voice-channel-only to use command message create
 		if (command.inVoiceChannel == true && !message.member.voice.channel) {
