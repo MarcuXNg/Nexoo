@@ -1,2 +1,2 @@
 # Nexoo
-just a simple bot that brings you joy
+discord bot 2022 by Nguyen Trung Kien
